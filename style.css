@@ -2,7 +2,8 @@
 {
 	background:		radial-gradient( rgb(70, 160, 150),rgb(40, 120, 110));
 	text-align:		center;
-	font-family:	Calibri;
+	/* font-family:	Calibri; */
+	font-family: fantasy;
 	margin:			auto;
 	/* margin:auto auto auto auto; */
 	
@@ -41,7 +42,7 @@
 #login
 {
 	width:			auto;
-	top:			10vmax;
+	top:			100px;
 	margin-left: 	30%;
 	margin-right:	30%;
 	z-index:		1;
@@ -49,6 +50,19 @@
 	padding:		5%;
 	padding-top:	0;
 	padding-bottom:	0; 
+}
+#home
+{
+	width:			auto;
+	top:			100px;
+	margin-left: 	30%;
+	margin-right:	30%;
+	z-index:		1;
+	display:		inline-block;
+	padding:		5%;
+	padding-top:	0;
+	padding-bottom:	0;
+	font-family: fantasy;
 }
 input[type=submit]
 {

@@ -1,32 +1,50 @@
 <?php
 	session_start();
+	echo "<script>alert(\"login page\");</script>";
 	print_r($_POST);
-	if($_POST["btn"] == "TRUE")
+	if($_POST["btn"] == "login")
 	{
 		echo "heyo"."<br>".PHP_EOL;
-		if(isset($_POST["name"]))
+		if(isset($_POST["username"]))
 		{
-			$_SESSION["name"] = $_POST["name"];
-			echo $_SESSION["name"]."<br>".PHP_EOL;
+			$_SESSION["username"] = $_POST["username"];
+			echo $_SESSION["username"]."<br>".PHP_EOL;
 		}
-		else 
+		else
+		{
+			echo "<script>alert(\"no name\");</script>";
 			echo "Incorrect name"."<br>".PHP_EOL;
+		}
 		if( isset($_POST["email"]))
 		{
 			$_SESSION["email"] = $_POST["email"];
 			echo $_SESSION["email"]."<br>".PHP_EOL;
 		}
-		else 
-			echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
-		if(isset($_POST["signup"]))
+		else
 		{
-			$_SESSION["submit"] = $_POST["signup"];
-			echo $_SESSION["submit"]."<br>".PHP_EOL;
+			echo "<script>alert(\"no email\");</script>";
+			echo "Incorrect email"."<br>".PHP_EOL;
 		}
+
+		if( isset($_POST["passwrd"]))
+		{
+			$_SESSION["passwrd"] = $_POST["passwrd"];
+			echo $_SESSION["passwrd"]."<br>".PHP_EOL;
+		}
+		else
+		{
+			echo "<script>alert(\"no passwrd\");</script>";
+			echo "Incorrect passwrd"."<br>".PHP_EOL;
+		}
+		header("Location: confirm_login.php");
 	}
-	else
+	else if($_POST["btn"] == "back")
+	{
+		//echo "<script>alert(\"back\")</script>";
+		header("Location: register.php");
+	}
 		echo "No".PHP_EOL;
-	echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
+	//echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
 ?>
 <html>
 <head>
@@ -39,7 +57,7 @@
 	<body>
 		
 		<div id="login" class="container">
-			<form action="register.php" method="post">
+			<form action="login.php" method="post">
 				<label for="username">Username:</label><br>
 				<input type="text" name="username" value="" /><br>
 				

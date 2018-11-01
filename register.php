@@ -1,23 +1,81 @@
 <?php
 	session_start();
-	//print_r($_POST);
-	if($_POST["btn"] == "TRUE")
+	echo "<script>alert(\"register page\");</script>";
+	print_r($_POST);
+	if($_POST["btn"] == "register")
 	{
-		//echo "heyo"."<br>".PHP_EOL;
-		if(isset($_POST["name"]))
+		echo "heyo"."<br>".PHP_EOL;
+		if(isset($_POST["fname"]))
 		{
-			$_SESSION["name"] = $_POST["name"];
-			//echo $_SESSION["name"]."<br>".PHP_EOL;
+			$_SESSION["fname"] = $_POST["fname"];
+			echo $_SESSION["fname"]."<br>".PHP_EOL;
 		}
-		else 
+		else
+		{
+			echo "<script>alert(\"no fname\");</script>";
+			echo "Incorrect fname"."<br>".PHP_EOL;
+		}
+
+		if(isset($_POST["lname"]))
+		{
+			$_SESSION["lname"] = $_POST["lname"];
+			echo $_SESSION["username"]."<br>".PHP_EOL;
+		}
+		else
+		{
+			echo "<script>alert(\"no lname\");</script>";
+			echo "Incorrect lname"."<br>".PHP_EOL;
+		}
+
+		if(isset($_POST["username"]))
+		{
+			$_SESSION["username"] = $_POST["username"];
+			echo $_SESSION["username"]."<br>".PHP_EOL;
+		}
+		else
+		{
+			echo "<script>alert(\"no name\");</script>";
 			echo "Incorrect name"."<br>".PHP_EOL;
-		if( isset($_POST["email"]))
+		}
+
+		if(isset($_POST["email"]))
 		{
 			$_SESSION["email"] = $_POST["email"];
-			//echo $_SESSION["email"]."<br>".PHP_EOL;
+			echo $_SESSION["email"]."<br>".PHP_EOL;
 		}
-		else 
-			echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
+		else
+		{
+			echo "<script>alert(\"no email\");</script>";
+			echo "Incorrect email"."<br>".PHP_EOL;
+		}
+
+		if(isset($_POST["passwrd"]))
+		{
+			$_SESSION["passwrd"] = $_POST["passwrd"];
+			echo $_SESSION["passwrd"]."<br>".PHP_EOL;
+		}
+		else
+		{
+			echo "<script>alert(\"no passwrd\");</script>";
+			echo "Incorrect passwrd"."<br>".PHP_EOL;
+		}
+
+		if(isset($_POST["valid_passwrd"]))
+		{
+			$_SESSION["valid_passwrd"] = $_POST["valid_passwrd"];
+			echo $_SESSION["valid_passwrd"]."<br>".PHP_EOL;
+		}
+		else
+		{
+			echo "<script>alert(\"no valid_passwrd\");</script>";
+			echo "Incorrect valid_passwrd"."<br>".PHP_EOL;
+		}
+		header("Location: confirm_login.php");
+	}
+	else if($_POST["btn"] == "back")
+	{
+		//echo "<script>alert(\"back\")</script>";
+		header("Location: index.php");
 	}
 	//echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
 ?>
@@ -34,13 +92,14 @@
 		
 		<div id="login" class="container">
 			<form action="" method="post">
-				<label for="fname">Full Name:</label><br>
+				<label for="fname">First Name:</label><br>
 				<input type="text" name="fname" value="" /><br>
 				
+				<label for="lname">Last Name:</label><br>
+				<input type="text" name="lname" value="" /><br>
+
 				<label for="username">Username:</label><br>
 				<input type="text" name="username" value="" /><br>
-				
-				
 				
 				<label for="email">Email:</label><br>
 				<input type="text" name="email" value="" /><br>
