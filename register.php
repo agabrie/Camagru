@@ -19,7 +19,7 @@
 		if(isset($_POST["lname"]))
 		{
 			$_SESSION["lname"] = $_POST["lname"];
-			echo $_SESSION["username"]."<br>".PHP_EOL;
+			echo $_SESSION["lname"]."<br>".PHP_EOL;
 		}
 		else
 		{
@@ -85,36 +85,38 @@
 		<title>CAMAGRU</title>
 		<div id="heading" class="container">
 			CAMAGRU
+			<a href="register.php"><linktext style="float:right">login/register</linktext></a>
 		</div>
 		<link href="style.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
-		
-		<div id="login" class="container">
-			<form action="" method="post">
-				<label for="fname">First Name:</label><br>
-				<input type="text" name="fname" value="" /><br>
-				
-				<label for="lname">Last Name:</label><br>
-				<input type="text" name="lname" value="" /><br>
-
-				<label for="username">Username:</label><br>
-				<input type="text" name="username" value="" /><br>
-				
-				<label for="email">Email:</label><br>
-				<input type="text" name="email" value="" /><br>
-				
-				<label for="passwrd">Confirm Password:</label><br>
-				<input type="password" name="passwrd" value="" /><br>
-
-				<label for="valid_passwrd">Password:</label><br>
-				<input type="password" name="valid_passwrd" value="" /><br>
-
-				<linktext>Already Registered? Login <a href=login.php>here</a>.<br></linktext>
-				<input type="submit" class="submit_button" name="btn" value="register"/>
-				<input type="submit" class="submit_button" name="btn" value="back" />
-			</form>
-		</div>
+		<div align="center">
+			<div id="login" class="container">
+				<form action="" method="post">
+					<label for="fname">First Name:</label><br>
+					<input type="text" name="fname" value="" /><br>
+					
+					<label for="lname">Last Name:</label><br>
+					<input type="text" name="lname" value="" /><br>
+	
+					<label for="username">Username:</label><br>
+					<input type="text" name="username" value="" /><br>
+					
+					<label for="email">Email:</label><br>
+					<input type="text" name="email" value="" /><br>
+					
+					<label for="passwrd">Confirm Password:</label><br>
+					<input type="password" name="passwrd" value="" /><br>
+	
+					<label for="valid_passwrd">Password:</label><br>
+					<input type="password" name="valid_passwrd" value="" /><br>
+	
+					<linktext>Already Registered? Login <a href=login.php>here</a>.<br></linktext>
+					<input type="submit" class="submit_button" name="btn" value="register"/>
+					<input type="submit" class="submit_button" name="btn" value="back" />
+				</form>
+			</div>
+		<div>
 	</body>
 	<div id="footing" class="container">
 			&copy agabrie

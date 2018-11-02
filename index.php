@@ -6,15 +6,28 @@
 			CAMAGRU
 			
 			<!-- link to login/register pages -->
+			<a href="register.php"><linktext style="float:right">login/register</linktext></a>
 		</div>
 		
 		<link href="style.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
-		<div class="container" id="home">
-			Welcome to CAMAGRU
-			<a href="register.php">login/register</a>
-		</div>
+		<!-- <div style="text-align: center"> -->
+		<!-- <div align="center"> -->
+			<div class="container" id="home">
+				Welcome to<br>
+				CAMAGRU<br>
+				
+				<br>
+				<div class="container" id="main">
+					Main
+					<div class="container" id="side">
+						Side
+					</div>
+				</div>
+				
+			</div>
+		<!-- </div> -->
 	</body>
 	<div id="footing" class="container">
 			&copy agabrie

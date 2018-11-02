@@ -8,7 +8,7 @@
 	/* margin:auto auto auto auto; */
 	
 	position:		relative;
-	border-radius:	10% 10%;
+	border-radius:	30px 30px;
 	border:			1px solid rgb(40, 120, 110);
 	font-size:		200%;
 	color:			white; 
@@ -43,26 +43,45 @@
 {
 	width:			auto;
 	top:			100px;
-	margin-left: 	30%;
-	margin-right:	30%;
 	z-index:		1;
 	display:		inline-block;
 	padding:		5%;
 	padding-top:	0;
-	padding-bottom:	0; 
+	padding-bottom:	0;
 }
 #home
 {
-	width:			auto;
+	width:			90%;
+	height:			80%;
 	top:			100px;
-	margin-left: 	30%;
-	margin-right:	30%;
+	left:			0px;
 	z-index:		1;
 	display:		inline-block;
 	padding:		5%;
 	padding-top:	0;
 	padding-bottom:	0;
 	font-family: fantasy;
+}
+#main
+{
+	float: left; 
+	left: 0px;
+	top: -40px;
+	background: rgb(89, 180, 150);
+	width:100%;
+	height:80%;
+	z-index:2;
+	display: block;
+}
+#side
+{
+	float: right;
+	/* background: rgb(89, 180, 150); */
+	/* top:-85%; */
+	width:30%;
+	height:100%;
+	z-index:3;
+	display:block;
 }
 input[type=submit]
 {
@@ -96,6 +115,7 @@ input[type=password]
 	font-size:		100%;
 	font-family:	'Times New Roman', Times, serif;
 	/* color:rgb(40, 120, 110); */
+	text-align:		center;
 	color:			aquamarine;
 	background:		rgb(40, 120, 110);
 	border:			2px solid white;
