@@ -1,20 +1,5 @@
 <?php
-include_once("install.php");
-    $db = new Db(array("servername"     =>"localhost",
-                        "username"		=>"root",
-                        "password"		=>"R00t",
-                        "dbname"		=>"CAMAGRU"
-                      ));
-    $db->createTABLE(array(	"name"		=>"USERS",
-                            "columns"	=>array("username VARCHAR(20) not NULL PRIMARY KEY",
-                                                "fname VARCHAR(20) default 'Mohammed'",
-                                                "lname VARCHAR(20) default 'LastNams'",
-                                                "email VARCHAR(40) not NULL",
-                                                "`password` VARCHAR(100) not NULL",
-                                                "verified TINYINT(1) NOT NULL DEFAULT '0'",
-                                                "gallery INT(11) NOT NULL default '0'"
-                                                )
-                        ));
+include_once("config.php");
 ?>
 <html>
 	<head>

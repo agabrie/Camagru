@@ -1,81 +1,102 @@
 <?php
 	session_start();
+	include_once("config.php");
 	echo "<script>alert(\"register page\");</script>";
 	print_r($_POST);
 	if($_POST["btn"] == "register")
 	{
-		echo "heyo"."<br>".PHP_EOL;
 		if(isset($_POST["fname"]))
 		{
 			$_SESSION["fname"] = $_POST["fname"];
-			echo $_SESSION["fname"]."<br>".PHP_EOL;
 		}
 		else
 		{
 			echo "<script>alert(\"no fname\");</script>";
-			echo "Incorrect fname"."<br>".PHP_EOL;
 		}
 
 		if(isset($_POST["lname"]))
 		{
 			$_SESSION["lname"] = $_POST["lname"];
-			echo $_SESSION["lname"]."<br>".PHP_EOL;
 		}
 		else
 		{
 			echo "<script>alert(\"no lname\");</script>";
-			echo "Incorrect lname"."<br>".PHP_EOL;
 		}
 
 		if(isset($_POST["username"]))
 		{
-			$_SESSION["username"] = $_POST["username"];
-			echo $_SESSION["username"]."<br>".PHP_EOL;
+			if(!username_taken($_POST["username"]))
+				$_SESSION["username"] = $_POST["username"];
+			else
+				echo "<script>alert(\"username already taken.\");</script>";
 		}
 		else
 		{
 			echo "<script>alert(\"no name\");</script>";
-			echo "Incorrect name"."<br>".PHP_EOL;
 		}
 
 		if(isset($_POST["email"]))
 		{
 			$_SESSION["email"] = $_POST["email"];
-			echo $_SESSION["email"]."<br>".PHP_EOL;
 		}
 		else
 		{
 			echo "<script>alert(\"no email\");</script>";
-			echo "Incorrect email"."<br>".PHP_EOL;
 		}
-
-		if(isset($_POST["passwrd"]))
-		{
-			$_SESSION["passwrd"] = $_POST["passwrd"];
-			echo $_SESSION["passwrd"]."<br>".PHP_EOL;
-		}
-		else
-		{
-			echo "<script>alert(\"no passwrd\");</script>";
-			echo "Incorrect passwrd"."<br>".PHP_EOL;
-		}
-
-		if(isset($_POST["valid_passwrd"]))
-		{
-			$_SESSION["valid_passwrd"] = $_POST["valid_passwrd"];
-			echo $_SESSION["valid_passwrd"]."<br>".PHP_EOL;
-		}
-		else
-		{
-			echo "<script>alert(\"no valid_passwrd\");</script>";
-			echo "Incorrect valid_passwrd"."<br>".PHP_EOL;
-		}
-		header("Location: confirm_login.php");
+		if(validate_password($_POST["passwrd"], $_POST["valid_passwrd"]))
+			header("Location: confirm_login.php");
 	}
 	else if($_POST["btn"] == "back")
 	{
-		//echo "<script>alert(\"back\")</script>";
 		header("Location: index.php");
+	}
+
+	function username_taken($username)
+	{
+		$taken = "SELECT COUNT(*) FROM USERS WHERE USERNAME = $username";
+		$names = $db->runStatement($db->dbconn,$taken);
+		echo "<script>alert(\"".$names."\");</script>";
+		return 0;
+	}
+	function validate_password($pwrd, $confpwrd)
+	{
+		$hashed1 = hash("whirlpool",hash("whirlpool",$pwrd));
+		$hashed2 = hash("whirlpool",hash("whirlpool",$confpwrd));
+		if($hashed1 === $hashed2)
+		{
+			if(strlen($pwrd) >= 8 && preg_match('/[A-Z]/', $pwrd) && preg_match('/[a-z]/', $pwrd) && preg_match('/[0-9]/', $pwrd))
+			{
+				$_SESSION["passwrd"] = $hashed1;
+				return(1);
+				// $_SESSION["valid_passwrd"] = $hashed2;
+			}
+			else
+			{
+				echo "<script>alert(\"password is not strong enough: Must contain 8 characters, Uppercase characters, lowercase charcters and numerical characters.\");</script>";
+				return 0;
+			}
+		}
+		// if(isset($pwrd))
+		// {
+		// 	$_SESSION["passwrd"] = $_POST["passwrd"];
+		// 	echo $_SESSION["passwrd"]."<br>".PHP_EOL;
+		// }
+		// else
+		// {
+		// 	echo "<script>alert(\"no passwrd\");</script>";
+		// 	echo "Incorrect passwrd"."<br>".PHP_EOL;
+		// }
+
+		// if(isset($_POST["valid_passwrd"]))
+		// {
+		// 	$_SESSION["valid_passwrd"] = $_POST["valid_passwrd"];
+		// 	echo $_SESSION["valid_passwrd"]."<br>".PHP_EOL;
+		// }
+		// else
+		// {
+		// 	echo "<script>alert(\"no valid_passwrd\");</script>";
+		// 	echo "Incorrect valid_passwrd"."<br>".PHP_EOL;
+		// }
 	}
 	//echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
 ?>
