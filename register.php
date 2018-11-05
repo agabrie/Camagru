@@ -53,10 +53,11 @@
 
 	function username_taken($username)
 	{
-		$taken = "SELECT COUNT(*) FROM USERS WHERE USERNAME = $username";
-		$names = $db->runStatement($db->dbconn,$taken);
-		echo "<script>alert(\"".$names."\");</script>";
-		return 0;
+		  $taken = "SELECT COUNT(*) FROM USERS WHERE `USERNAME` = ".stringify($username);
+		//   $names = $db->runStatement($db->dbconn,$taken);
+		// echo "<script>alert(\"".$names."\");</script>";
+		echo $taken;
+		return 1;
 	}
 	function validate_password($pwrd, $confpwrd)
 	{
