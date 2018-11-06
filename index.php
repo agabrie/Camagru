@@ -1,6 +1,8 @@
 <?php
 include_once("config.php");
-?>
+if($_POST["btn"] == "login/signin")
+	header("Location: register.php");
+?> 
 <html>
 	<head>
 		<title>CAMAGRU</title>
@@ -9,6 +11,9 @@ include_once("config.php");
 			
 			<!-- link to login/register pages -->
 			<a href="register.php"><linktext style="float:right">login/register</linktext></a>
+			<!-- <form action="" method="post">
+				<input type="submit" class="header_button" name="btn" value="login/signin">
+			</form> -->
 		</div>
 		
 		<link href="style.css" type="text/css" rel="stylesheet" />

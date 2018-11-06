@@ -19,7 +19,7 @@ class Db
 		$this->createDB();
 		$this->dbconn = new PDO("mysql:host=$this->servername;dbname=$this->dbname;", $this->username, $this->password);
 		$this->dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		echo "db object contructed<br>";	
+		// echo "db object contructed<br>";	
 	}
 	
 	function createDB()
@@ -27,7 +27,7 @@ class Db
 		 try
 		 {	
 			$this->runStatement($this->sconn,"CREATE DATABASE IF NOT EXISTS ".$this->dbname);
-			echo "db created succesfully <br>";	
+			// echo "db created succesfully <br>";	
 		 }
 		 catch(PDOException $e)
 		 {
@@ -52,7 +52,7 @@ class Db
 			}
 			$statement = $statement.")";
 			$this->runStatement($this->dbconn, $statement);
-			echo "Table created successfully<br>";
+			// echo "Table created successfully<br>";
 		}
 		catch(PDOException $e)
 		{
@@ -60,14 +60,21 @@ class Db
 		}
 		
 	}
-	
+	function getDBConn()
+	{
+		return ($this->dbconn);
+	}
+
 	function runStatement($pdo,$statement)
 	{
 		try
 		{
+			// echo $statement.PHP_EOL;
 			$run = $pdo->prepare($statement);
-			$run->execute();
-			echo "Succesfully ran statement<br>";
+			$return = $run->execute();
+			//print_r($return);
+			//  echo "Succesfully ran statement<br>";
+			return($return);
 		}
 		catch(PDOException $e)
 		{
@@ -79,6 +86,13 @@ class Db
 	{
 		$this->sconn	= null;
 		$this->dbconn	= null;
+	}
+
+	function returnRecord($statement)
+	{
+		echo "somrthing";
+		$something = $this->runStatement($this->dbconn, $statement);
+		return($something);
 	}
 	function insertRecord($record)
 	{

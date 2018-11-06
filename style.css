@@ -3,7 +3,7 @@
 	background:		radial-gradient( rgb(70, 160, 150),rgb(40, 120, 110));
 	text-align:		center;
 	/* font-family:	Calibri; */
-	font-family: fantasy;
+	font-family: Georgia, 'Times New Roman', Times, serif;
 	margin:			auto;
 	/* margin:auto auto auto auto; */
 	
@@ -60,7 +60,7 @@
 	padding:		5%;
 	padding-top:	0;
 	padding-bottom:	0;
-	font-family: fantasy;
+	font-family: 'Times New Roman', Times, sans-serif;
 }
 #main
 {
@@ -80,8 +80,13 @@
 	/* top:-85%; */
 	width:30%;
 	height:100%;
+	font-size:100%;
 	z-index:3;
 	display:block;
+}
+.header_button
+{
+	font-size:		50%;
 }
 input[type=submit]
 {
@@ -100,7 +105,7 @@ input[type=submit]
 input[type=text]
 {
 	font-size:		100%;
-	font-family:	'Times New Roman', Times, serif;
+	font-family:	'Times New Roman', Times, sans-serif;
 	/* color:rgb(40, 120, 110);
 	border:2px solid rgb(40, 120, 110); */
 	text-align:		center;
@@ -113,7 +118,7 @@ input[type=text]
 input[type=password]
 {
 	font-size:		100%;
-	font-family:	'Times New Roman', Times, serif;
+	font-family:	'Calibri', Times, sans-serif;
 	/* color:rgb(40, 120, 110); */
 	text-align:		center;
 	color:			aquamarine;

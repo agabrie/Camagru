@@ -1,8 +1,8 @@
 <?php
 	session_start();
-	include_once("config.php");
+	require("config.php");
 	echo "<script>alert(\"register page\");</script>";
-	print_r($_POST);
+	// print_r($_POST);
 	if($_POST["btn"] == "register")
 	{
 		if(isset($_POST["fname"]))
@@ -25,7 +25,8 @@
 
 		if(isset($_POST["username"]))
 		{
-			if(!username_taken($_POST["username"]))
+			$taken = username_taken($_POST["username"]);
+			if($taken < 1)
 				$_SESSION["username"] = $_POST["username"];
 			else
 				echo "<script>alert(\"username already taken.\");</script>";
@@ -53,11 +54,18 @@
 
 	function username_taken($username)
 	{
-		  $taken = "SELECT COUNT(*) FROM USERS WHERE `USERNAME` = ".stringify($username);
-		//   $names = $db->runStatement($db->dbconn,$taken);
-		// echo "<script>alert(\"".$names."\");</script>";
-		echo $taken;
-		return 1;
+		$taken = "SELECT COUNT(*) FROM USERS WHERE `USERNAME` = ".stringify($username);
+		echo(get_class($db));
+		//$db->returnRecord($taken);
+		// echo $taken.PHP_EOL;
+		//print_r($db->getDBConn());
+		//$names = $db->runStatement($db->getDBConn(),$taken);
+		// $namethingy = $names->fetch_all();
+		// echo(count($namesthingy));
+		// echo "Dah";
+		   //  echo "<script>alert(\"".$names."\");</script>";
+			// echo $taken;
+		return 0;
 	}
 	function validate_password($pwrd, $confpwrd)
 	{
