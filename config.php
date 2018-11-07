@@ -13,7 +13,8 @@
                                                 "email VARCHAR(40) not NULL",
                                                 "`password` VARCHAR(255) not NULL",
                                                 "verified TINYINT(1) NOT NULL DEFAULT '0'",
-                                                "gallery INT(11) NOT NULL default '0'"
+                                                "gallery INT(11) NOT NULL default '0'",
+                                                "online TINYINT(1) NOT NULL DEFAULT '0'"
                                                 )
                         ));
     

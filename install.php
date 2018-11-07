@@ -7,7 +7,7 @@ class Db
 	private $dbname 	;
 	private $sconn		;
 	private $dbconn		;
-	
+	private static $gcount;
 	function __construct($database)
 	{
 		$this->servername = $database["servername"];
@@ -26,6 +26,7 @@ class Db
 		 try
 		 {	
 			$this->runStatement($this->sconn,"CREATE DATABASE IF NOT EXISTS ".$this->dbname);
+			Self::$gcount = 0;
 		 }
 		 catch(PDOException $e)
 		 {
@@ -68,7 +69,10 @@ class Db
 		{
 			$run = $pdo->prepare($statement);
 			$return = $run->execute();
-			return($run);
+			if($return)
+				return($run);
+			else
+				return (0);
 		}
 		catch(PDOException $e)
 		{
@@ -81,7 +85,10 @@ class Db
 		$this->sconn	= null;
 		$this->dbconn	= null;
 	}
-
+	function gallerycount()
+	{
+		return(Self::$gcount++);
+	}
 	function returnRecord($statement)
 	{
 		$something = $this->runStatement($this->dbconn, $statement);

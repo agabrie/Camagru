@@ -3,8 +3,8 @@
 	include("config.php");
 	if($_POST["btn"] == "register")
 	{
-		echo "<script>alert('here');</script>";
-		echo testErrors($_POST)."<br>";
+		// echo "<script>alert('here');</script>";
+		// echo testErrors($_POST)."<br>";
 		switch(testErrors($_POST))
 		{
 			case 1:
@@ -35,7 +35,7 @@
 				echo "Passwords dont match";
 				break;
 			default:
-				header("Location: confirm_login.php");
+				header("Location: confirm_reg.php");
 				break;
 		}
 		
@@ -134,21 +134,21 @@
 			<div id="login" class="container">
 				<form action="" method="post">
 					<label for="fname">First Name:</label><br>
-					<input type="text" name="fname" value="" /><br>
+					<input type="text" name="fname" value="<?php echo $_SESSION['fname'];?>" /><br>
 					
 					<label for="lname">Last Name:</label><br>
-					<input type="text" name="lname" value="" /><br>
+					<input type="text" name="lname" value="<?php echo $_SESSION['lname'];?>" /><br>
 	
 					<label for="username">Username:</label><br>
-					<input type="text" name="username" value="" /><br>
+					<input type="text" name="username" value="<?php echo $_SESSION['username'];?>" /><br>
 					
 					<label for="email">Email:</label><br>
-					<input type="text" name="email" value="" /><br>
+					<input type="text" name="email" value="<?php echo $_SESSION['email'];?>" /><br>
 					
-					<label for="passwrd">Confirm Password:</label><br>
+					<label for="passwrd">Password:</label><br>
 					<input type="password" name="passwrd" value="" /><br>
 	
-					<label for="valid_passwrd">Password:</label><br>
+					<label for="valid_passwrd">Confirm Password:</label><br>
 					<input type="password" name="valid_passwrd" value="" /><br>
 	
 					<linktext>Already Registered? Login <a href=login.php>here</a>.<br></linktext>
