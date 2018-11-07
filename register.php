@@ -3,8 +3,6 @@
 	include("config.php");
 	if($_POST["btn"] == "register")
 	{
-		// echo "<script>alert('here');</script>";
-		// echo testErrors($_POST)."<br>";
 		switch(testErrors($_POST))
 		{
 			case 1:
@@ -89,6 +87,7 @@
 		else
 			return 7;
 	}
+
 	function checkUnique($condition,$value)
 	{
 		global $db;
@@ -97,6 +96,7 @@
 		$records = $db->returnRecord($taken);
 		return (!count($records));
 	}
+	
 	function validate_password($pwrd, $confpwrd)
 	{
 		$hashed1 = hash("whirlpool",hash("whirlpool",$pwrd));

@@ -1,50 +1,46 @@
 <?php
 	session_start();
-	// echo "<script>alert(\"login page\");</script>";
-	// print_r($_POST);
+	include("config.php");
 	if($_POST["btn"] == "login")
 	{
-		echo "heyo"."<br>".PHP_EOL;
 		if(isset($_POST["username"]))
 		{
 			$_SESSION["username"] = $_POST["username"];
-			echo $_SESSION["username"]."<br>".PHP_EOL;
 		}
 		else
 		{
-			echo "<script>alert(\"no name\");</script>";
 			echo "Incorrect name"."<br>".PHP_EOL;
 		}
-		if( isset($_POST["email"]))
-		{
-			$_SESSION["email"] = $_POST["email"];
-			echo $_SESSION["email"]."<br>".PHP_EOL;
-		}
-		else
-		{
-			echo "<script>alert(\"no email\");</script>";
-			echo "Incorrect email"."<br>".PHP_EOL;
-		}
-
 		if( isset($_POST["passwrd"]))
 		{
 			$_SESSION["passwrd"] = $_POST["passwrd"];
-			echo $_SESSION["passwrd"]."<br>".PHP_EOL;
 		}
 		else
 		{
-			echo "<script>alert(\"no passwrd\");</script>";
 			echo "Incorrect passwrd"."<br>".PHP_EOL;
 		}
 		header("Location: confirm_login.php");
 	}
 	else if($_POST["btn"] == "back")
 	{
-		//echo "<script>alert(\"back\")</script>";
 		header("Location: register.php");
 	}
-		echo "No".PHP_EOL;
-	//echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
+
+	function testErrors($post)
+	{
+		if(check_username($post["username"]) && check_password($post["passwrd"]))
+			return 1;
+		else
+			return 0;
+	}
+	function check_username($name)
+	{
+		return 1;
+	}
+	function check_password($passwrd)
+	{
+		return 1;
+	}
 ?>
 <html>
 <head>
