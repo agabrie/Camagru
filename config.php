@@ -1,5 +1,6 @@
 <?php
-    include_once("install.php");
+    require("install.php");
+    global $db;
     $db = new Db(array("servername"     =>"localhost",
                         "username"		=>"root",
                         "password"		=>"R00t",

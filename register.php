@@ -1,71 +1,101 @@
 <?php
 	session_start();
-	require("config.php");
-	echo "<script>alert(\"register page\");</script>";
-	// print_r($_POST);
+	include("config.php");
 	if($_POST["btn"] == "register")
 	{
-		if(isset($_POST["fname"]))
+		echo "<script>alert('here');</script>";
+		echo testErrors($_POST)."<br>";
+		switch(testErrors($_POST))
 		{
-			$_SESSION["fname"] = $_POST["fname"];
+			case 1:
+				echo "No First NAME";
+				break;
+			case 2:
+				echo "No Last NAME";
+				break;
+			case 3:
+				echo "USERNAME already exists";
+				break;
+			case 4:
+				echo "No USERNAME";
+				break;
+			case 5:
+				echo "email already in use";
+				break;
+			case 6:
+				echo "No Email";
+				break;
+			case 7:
+				echo "No Password";
+				break;
+			case 8:
+				echo "Password not Strong Enough";
+				break;
+			case 9:
+				echo "Passwords dont match";
+				break;
+			default:
+				header("Location: confirm_login.php");
+				break;
 		}
-		else
-		{
-			echo "<script>alert(\"no fname\");</script>";
-		}
-
-		if(isset($_POST["lname"]))
-		{
-			$_SESSION["lname"] = $_POST["lname"];
-		}
-		else
-		{
-			echo "<script>alert(\"no lname\");</script>";
-		}
-
-		if(isset($_POST["username"]))
-		{
-			$taken = username_taken($_POST["username"]);
-			if($taken < 1)
-				$_SESSION["username"] = $_POST["username"];
-			else
-				echo "<script>alert(\"username already taken.\");</script>";
-		}
-		else
-		{
-			echo "<script>alert(\"no name\");</script>";
-		}
-
-		if(isset($_POST["email"]))
-		{
-			$_SESSION["email"] = $_POST["email"];
-		}
-		else
-		{
-			echo "<script>alert(\"no email\");</script>";
-		}
-		if(validate_password($_POST["passwrd"], $_POST["valid_passwrd"]))
-			header("Location: confirm_login.php");
+		
 	}
 	else if($_POST["btn"] == "back")
 	{
 		header("Location: index.php");
 	}
 
-	function username_taken($username)
+	function testErrors($post)
 	{
-		$taken = "SELECT COUNT(*) FROM USERS WHERE `USERNAME` = ".stringify($username);
-		echo(get_class($db));
-		//$db->returnRecord($taken);
-		// echo $taken.PHP_EOL;
-		//print_r($db->getDBConn());
-		//$names = $db->runStatement($db->getDBConn(),$taken);
-		// $namethingy = $names->fetch_all();
-		// echo(count($namesthingy));
-		// echo "Dah";
-		   //  echo "<script>alert(\"".$names."\");</script>";
-			// echo $taken;
-		return 0;
+		print_r($post);
+		if($post["fname"] != "")
+		{
+			$_SESSION["fname"] = $post["fname"];
+		}
+		else
+			return 1;
+
+		if($post["lname"] != "")
+		{
+			$_SESSION["lname"] = $post["lname"];
+		}
+		else
+			return 2;
+
+		if($post["username"] != "")
+		{
+			if(checkUnique("USERNAME",$post["username"]))
+				$_SESSION["username"] = $post["username"];
+			else
+				return 3;
+		}
+		else
+			return 4;
+
+		if($post["email"] != "")
+		{
+			if(checkUnique("EMAIL",$post["email"]))
+				$_SESSION["email"] = $post["email"];
+			else
+				return 5;
+		}
+		else
+			return 6;
+		if($post["passwrd"] != "")
+		{
+			$validated = validate_password($post["passwrd"], $post["valid_passwrd"]);
+			return $validated;
+		}
+		else
+			return 7;
+	}
+	function checkUnique($condition,$value)
+	{
+		global $db;
+
+		$taken = "SELECT * FROM USERS WHERE ".$condition." = ".stringify($value).";";
+		$records = $db->returnRecord($taken);
+		return (!count($records));
 	}
 	function validate_password($pwrd, $confpwrd)
 	{
@@ -76,38 +106,18 @@
 			if(strlen($pwrd) >= 8 && preg_match('/[A-Z]/', $pwrd) && preg_match('/[a-z]/', $pwrd) && preg_match('/[0-9]/', $pwrd))
 			{
 				$_SESSION["passwrd"] = $hashed1;
-				return(1);
-				// $_SESSION["valid_passwrd"] = $hashed2;
+				return(0);
 			}
 			else
 			{
-				echo "<script>alert(\"password is not strong enough: Must contain 8 characters, Uppercase characters, lowercase charcters and numerical characters.\");</script>";
-				return 0;
+				return 8;
 			}
 		}
-		// if(isset($pwrd))
-		// {
-		// 	$_SESSION["passwrd"] = $_POST["passwrd"];
-		// 	echo $_SESSION["passwrd"]."<br>".PHP_EOL;
-		// }
-		// else
-		// {
-		// 	echo "<script>alert(\"no passwrd\");</script>";
-		// 	echo "Incorrect passwrd"."<br>".PHP_EOL;
-		// }
-
-		// if(isset($_POST["valid_passwrd"]))
-		// {
-		// 	$_SESSION["valid_passwrd"] = $_POST["valid_passwrd"];
-		// 	echo $_SESSION["valid_passwrd"]."<br>".PHP_EOL;
-		// }
-		// else
-		// {
-		// 	echo "<script>alert(\"no valid_passwrd\");</script>";
-		// 	echo "Incorrect valid_passwrd"."<br>".PHP_EOL;
-		// }
+		else
+		{
+			return 9;
+		}
 	}
-	//echo "<color=\"red\">Incorrect email.\"<br>\"".PHP_EOL;
 ?>
 
 <html>

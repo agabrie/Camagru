@@ -19,7 +19,6 @@ class Db
 		$this->createDB();
 		$this->dbconn = new PDO("mysql:host=$this->servername;dbname=$this->dbname;", $this->username, $this->password);
 		$this->dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		// echo "db object contructed<br>";	
 	}
 	
 	function createDB()
@@ -27,7 +26,6 @@ class Db
 		 try
 		 {	
 			$this->runStatement($this->sconn,"CREATE DATABASE IF NOT EXISTS ".$this->dbname);
-			// echo "db created succesfully <br>";	
 		 }
 		 catch(PDOException $e)
 		 {
@@ -52,7 +50,6 @@ class Db
 			}
 			$statement = $statement.")";
 			$this->runStatement($this->dbconn, $statement);
-			// echo "Table created successfully<br>";
 		}
 		catch(PDOException $e)
 		{
@@ -69,12 +66,9 @@ class Db
 	{
 		try
 		{
-			// echo $statement.PHP_EOL;
 			$run = $pdo->prepare($statement);
 			$return = $run->execute();
-			//print_r($return);
-			//  echo "Succesfully ran statement<br>";
-			return($return);
+			return($run);
 		}
 		catch(PDOException $e)
 		{
@@ -90,9 +84,9 @@ class Db
 
 	function returnRecord($statement)
 	{
-		echo "somrthing";
 		$something = $this->runStatement($this->dbconn, $statement);
-		return($something);
+		
+		return($something->fetchAll());
 	}
 	function insertRecord($record)
 	{
@@ -118,7 +112,6 @@ class Db
 			$count++;
 		}
 		$statement 	= $statement.");";
-		echo $statement.PHP_EOL;
 		$this->runStatement($this->dbconn, $statement);
 	}
 }

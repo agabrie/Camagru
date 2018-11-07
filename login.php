@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	echo "<script>alert(\"login page\");</script>";
-	print_r($_POST);
+	// echo "<script>alert(\"login page\");</script>";
+	// print_r($_POST);
 	if($_POST["btn"] == "login")
 	{
 		echo "heyo"."<br>".PHP_EOL;
