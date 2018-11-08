@@ -2,10 +2,8 @@
 {
 	background:		radial-gradient( rgb(70, 160, 150),rgb(40, 120, 110));
 	text-align:		center;
-	/* font-family:	Calibri; */
 	font-family: Georgia, 'Times New Roman', Times, serif;
 	margin:			auto;
-	/* margin:auto auto auto auto; */
 	
 	position:		relative;
 	border-radius:	30px 30px;
@@ -19,13 +17,13 @@
 {
 	position:		fixed;
 	width:			99%;
+	height:7vh;
 	top:			0;
 	left:			0.5%;
 	z-index:		2;
 	font-size:		400%;
 	border-radius:	0% 0% 50% 50%;
-	color:			aquamarine; 
-	/* display: inline-block; */
+	color:			aquamarine;
 }
 #footing
 {
@@ -36,14 +34,13 @@
 	z-index:		2;
 	font-size:		400%;
 	border-radius:	50% 50% 0% 0%;
-	color:			aquamarine; 
-	/* display: inline-block; */
+	color:			aquamarine;
 }
 #login
 {
 	width:			auto;
-	top:			100px;
-	z-index:		1;
+	top:			10vh;
+	z-index:		0;
 	display:		inline-block;
 	padding:		5%;
 	padding-top:	0;
@@ -53,7 +50,7 @@
 {
 	width:			90%;
 	height:			80%;
-	top:			100px;
+	top:			10vh;
 	left:			0px;
 	z-index:		1;
 	display:		inline-block;
@@ -76,8 +73,6 @@
 #side
 {
 	float: right;
-	/* background: rgb(89, 180, 150); */
-	/* top:-85%; */
 	width:30%;
 	height:100%;
 	font-size:100%;
@@ -86,12 +81,16 @@
 }
 .header_button
 {
-	font-size:		50%;
+	z-index:10;
+	width:100%;
+	padding:1vw;
+	position:relative;
+	margin: auto;
+	text-align:center;
 }
 input[type=submit]
 {
-	margin:			1%;
-	padding:		5%;
+	margin:			0;
 	padding-top:	0%;
 	padding-bottom:	0%;
 	font-size:		100%;
@@ -106,8 +105,6 @@ input[type=text]
 {
 	font-size:		100%;
 	font-family:	'Times New Roman', Times, sans-serif;
-	/* color:rgb(40, 120, 110);
-	border:2px solid rgb(40, 120, 110); */
 	text-align:		center;
 	color:			aquamarine;
 	background:		rgb(40, 120, 110);
@@ -119,7 +116,6 @@ input[type=password]
 {
 	font-size:		100%;
 	font-family:	'Calibri', Times, sans-serif;
-	/* color:rgb(40, 120, 110); */
 	text-align:		center;
 	color:			aquamarine;
 	background:		rgb(40, 120, 110);

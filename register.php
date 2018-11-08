@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include("config.php");
+	include("header.php");
 	if($_POST["btn"] == "register")
 	{
 		switch(testErrors($_POST))
@@ -121,16 +122,8 @@
 ?>
 
 <html>
-	<head>
-		<title>CAMAGRU</title>
-		<div id="heading" class="container">
-			CAMAGRU
-			<a href="register.php"><linktext style="float:right">login/register</linktext></a>
-		</div>
-		<link href="style.css" type="text/css" rel="stylesheet" />
-	</head>
 	<body>
-		<div align="center">
+		<div style="text-align:center">
 			<div id="login" class="container">
 				<form action="" method="post">
 					<label for="fname">First Name:</label><br>
@@ -158,7 +151,4 @@
 			</div>
 		<div>
 	</body>
-	<div id="footing" class="container">
-			&copy agabrie
-	</div>
 </html>
