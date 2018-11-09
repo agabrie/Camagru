@@ -1,27 +1,44 @@
 <?php
-    require("install.php");
-    global $db;
-    $db = new Db(array("servername"     =>"localhost",
-                        "username"		=>"root",
-                        "password"		=>"R00t",
-                        "dbname"		=>"CAMAGRU"
-                      ));
-    $db->createTABLE(array(	"name"		=>"USERS",
-                            "columns"	=>array("username VARCHAR(20) not NULL PRIMARY KEY",
-                                                "fname VARCHAR(20) default 'Mohammed'",
-                                                "lname VARCHAR(20) default 'LastNams'",
-                                                "email VARCHAR(40) not NULL",
-                                                "`password` VARCHAR(255) not NULL",
-                                                "verified TINYINT(1) NOT NULL DEFAULT '0'",
-                                                "gallery INT(11) NOT NULL default '0'",
-                                                "online TINYINT(1) NOT NULL DEFAULT '0'"
-                                                )
-                        ));
-    
-    function stringify($string)
-    {
-        return "'".$string."'";
-    }
-    //$db->closeConnnections();
-    
+	require("install.php");
+	// global $db;
+	$db = new Db(
+				array	(
+						"servername"     =>"localhost",
+						"username"		=>"root",
+						"password"		=>"R00t",
+						"dbname"		=>"CAMAGRU"
+						)
+				);
+	$columns = array	(
+						"userId INT not NULL AUTO_INCREMENT PRIMARY KEY",
+						"username VARCHAR(20) not NULL",
+						"fname VARCHAR(20) default 'Mohammed'",
+						"lname VARCHAR(20) default 'LastNams'",
+						"email VARCHAR(40) not NULL",
+						"`password` VARCHAR(255) not NULL",
+						"verified TINYINT(1) NOT NULL DEFAULT '0'",
+						"galleryId INT(11) NOT NULL default '0'",
+						"token VARCHAR(255) not NULL"
+						);
+	$db->createTABLE(
+					array	(	"name"		=>"USERS",
+								"columns"	=>$columns
+							)
+					);
+	function stringify($string)
+	{
+		return "'".$string."'";
+	}
+
+	function sendMail($mail)
+	{
+		$to			=	$mail["to"];										//'noreply@localhost.co.za';
+		$subject	=	$mail["subject"];									//'Camagru Verify Your Account';
+		$message	=	$mail["message"];									//'hello';
+		$headers	=	"From: ".$mail["headers"]["from"]."\r\n".			//'From: noreply@localhost.co.za' . "\r\n" .
+						"Reply-To: ".$mail["headers"]["Reply-To"]."\r\n".	//'Reply-To: noreply@localhost.co.za' . "\r\n" .
+						"X-Mailer: ".$mail["headers"]["X-Mailer"];			//'X-Mailer: PHP/' . phpversion();
+		mail($to, $subject, $message, $headers);
+	}
+	//$db->closeConnnections();
 ?>

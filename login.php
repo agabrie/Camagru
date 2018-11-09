@@ -4,23 +4,16 @@
 	include("header.php");
 	if($_POST["btn"] == "login")
 	{
-		if(isset($_POST["username"]))
+		// print_r($_POST);
+		switch(testErrors($_POST))
 		{
-			$_SESSION["username"] = $_POST["username"];
+			case 1:
+				echo "Username or password is incorrect";
+				break;
+			default:
+				header("Location: confirm_login.php");
+				break;
 		}
-		else
-		{
-			echo "Incorrect name"."<br>".PHP_EOL;
-		}
-		if( isset($_POST["passwrd"]))
-		{
-			$_SESSION["passwrd"] = $_POST["passwrd"];
-		}
-		else
-		{
-			echo "Incorrect passwrd"."<br>".PHP_EOL;
-		}
-		header("Location: confirm_login.php");
 	}
 	else if($_POST["btn"] == "back")
 	{
@@ -29,19 +22,31 @@
 
 	function testErrors($post)
 	{
-		if(check_username($post["username"]) && check_password($post["passwrd"]))
-			return 1;
-		else
+		if(check_login($post["username"],$post["passwrd"]))
 			return 0;
+		else
+			return 1;
 	}
-	function check_username($name)
+	function check_login($name,$passwrd)
 	{
-		$statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);
-		return 1;
-	}
-	function check_password($passwrd)
-	{
-		return 1;
+		global $db;
+		$statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);//." AND PASSWORD = ".stringify(hash("whirlpool", hash("whirlpool", $passwrd)));
+		echo $statement."<br>";
+		$records = $db->returnRecord($statement);
+		// echo "<script language='javascript'>alert(".print_r($records).")</script><br>";
+		if($records[0]["password"] == hash("whirlpool", hash("whirlpool", $passwrd)))
+			$_SESSION["passwrd"]=$records[0]["password"];
+		else
+			return(0);
+		$_SESSION["username"] = $records[0]["username"];
+		$_SESSION["fname"] = $records[0]["fname"];
+		$_SESSION["lname"] = $records[0]["lname"];
+		$_SESSION["email"] = $records[0]["email"];
+		// echo "password from DB : ".$records[0]["password"]."<br>";
+		// echo "input : ".hash("whirlpool", hash("whirlpool", $passwrd))."<br>";
+		$_SESSION["verified"]=$records[0]["verified"];
+		// print_r($_SESSION);
+		return(1);
 	}
 ?>
 <html>
@@ -52,9 +57,6 @@
 				<form action="login.php" method="post">
 					<label for="username">Username:</label><br>
 					<input type="text" name="username" value="" /><br>
-
-					<label for="email">Email:</label><br>
-					<input type="text" name="email" value="" /><br>
 
 					<label for="passwrd">Confirm Password:</label><br>
 					<input type="password" name="passwrd" value="" /><br>

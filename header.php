@@ -4,11 +4,13 @@ include_once("config.php");
 if($_POST["btn"] == "login/signin")
     header("Location: register.php");
 if($_POST["btn"] == "Welcome ".$_SESSION["username"])
-    header("Location: login.php");
+    header("Location: register.php");
 if($_POST["btn"] == "logout")
     header("Location: logout.php");
 if($_POST["btn"] == "settings")
     header("Location: settings.php");
+if($_POST["btn"] == "home")
+    header("Location: index.php");
 ?> 
 <html>
 <head>
@@ -17,15 +19,27 @@ if($_POST["btn"] == "settings")
 			CAMAGRU
 		</div>
         <form action="" method="post">
-            <div style="position:fixed;right:1vw;z-index:10;">
+            <div style="position:fixed;leftt:1vw;z-index:10;">
             <table>
                 <tr>
-                    
+                <td><input type="submit" class="header_button" name="btn" value="home"></td>
                     <?php
                         if($_SESSION["username"] != "")
                         {
                             echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.$_SESSION["username"].'"></td>'.
+                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.$_SESSION["username"].'"></td>';
+                        }
+                    ?>
+                </tr>
+            </table>
+            </div>
+            <div style="position:fixed;right:1vw;z-index:10;">
+            <table>
+                <tr>
+                    <?php
+                        if($_SESSION["username"] != "")
+                        {
+                            echo
                             '<td><input type="submit" class="header_button" name="btn" value="logout"></td>'.
                             '<td><input type="submit" class="header_button" name="btn" value="settings"></td>';
                         }

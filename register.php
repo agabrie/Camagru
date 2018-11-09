@@ -46,7 +46,7 @@
 
 	function testErrors($post)
 	{
-		print_r($post);
+		// print_r($post);
 		if($post["fname"] != "")
 		{
 			$_SESSION["fname"] = $post["fname"];
@@ -93,8 +93,9 @@
 	{
 		global $db;
 
-		$taken = "SELECT * FROM USERS WHERE ".$condition." = ".stringify($value).";";
-		$records = $db->returnRecord($taken);
+		$statement = "SELECT * FROM USERS WHERE ".$condition." = ".stringify($value).";";
+		$records = $db->returnRecord($statement);
+		// echo "<script language='javascript'>alert(".print_r($records).")</script>";
 		return (!count($records));
 	}
 	
@@ -127,16 +128,16 @@
 			<div id="login" class="container">
 				<form action="" method="post">
 					<label for="fname">First Name:</label><br>
-					<input type="text" name="fname" value="<?php echo $_SESSION['fname'];?>" /><br>
+					<input type="text" name="fname" value="<?php /*echo $_SESSION['fname'];*/?>" /><br>
 					
 					<label for="lname">Last Name:</label><br>
-					<input type="text" name="lname" value="<?php echo $_SESSION['lname'];?>" /><br>
+					<input type="text" name="lname" value="<?php /*echo $_SESSION['lname'];*/?>" /><br>
 	
 					<label for="username">Username:</label><br>
-					<input type="text" name="username" value="<?php echo $_SESSION['username'];?>" /><br>
+					<input type="text" name="username" value="<?php /*echo $_SESSION['username'];*/?>" /><br>
 					
 					<label for="email">Email:</label><br>
-					<input type="text" name="email" value="<?php echo $_SESSION['email'];?>" /><br>
+					<input type="text" name="email" value="<?php /*echo $_SESSION['email'];*/?>" /><br>
 					
 					<label for="passwrd">Password:</label><br>
 					<input type="password" name="passwrd" value="" /><br>

@@ -2,7 +2,7 @@
 {
 	background:		radial-gradient( rgb(70, 160, 150),rgb(40, 120, 110));
 	text-align:		center;
-	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-family: 	Georgia, 'Times New Roman', Times, serif;
 	margin:			auto;
 	
 	position:		relative;
@@ -17,7 +17,7 @@
 {
 	position:		fixed;
 	width:			99%;
-	height:7vh;
+	height:			7vh;
 	top:			0;
 	left:			0.5%;
 	z-index:		2;
@@ -57,36 +57,36 @@
 	padding:		5%;
 	padding-top:	0;
 	padding-bottom:	0;
-	font-family: 'Times New Roman', Times, sans-serif;
+	font-family: 	'Times New Roman', Times, sans-serif;
 }
 #main
 {
-	float: left; 
-	left: 0px;
-	top: -40px;
-	background: rgb(89, 180, 150);
-	width:100%;
-	height:80%;
-	z-index:2;
-	display: block;
+	float: 			left; 
+	left: 			0px;
+	top: 			-40px;
+	background:		rgb(89, 180, 150);
+	width:			100%;
+	height:			80%;
+	z-index:		2;
+	display: 		block;
 }
 #side
 {
-	float: right;
-	width:30%;
-	height:100%;
-	font-size:100%;
-	z-index:3;
-	display:block;
+	float:			right;
+	width:			30%;
+	height:			100%;
+	font-size:		100%;
+	z-index:		3;
+	display:		block;
 }
 .header_button
 {
-	z-index:10;
-	width:100%;
-	padding:1vw;
-	position:relative;
-	margin: auto;
-	text-align:center;
+	z-index:		10;
+	width:			100%;
+	padding:		1vw;
+	position:		relative;
+	margin: 		auto;
+	text-align:		center;
 }
 input[type=submit]
 {
