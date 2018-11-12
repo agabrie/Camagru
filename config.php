@@ -38,7 +38,7 @@
 		$headers	=	"From: ".$mail["headers"]["from"]."\r\n".			//'From: noreply@localhost.co.za' . "\r\n" .
 						"Reply-To: ".$mail["headers"]["Reply-To"]."\r\n".	//'Reply-To: noreply@localhost.co.za' . "\r\n" .
 						"X-Mailer: ".$mail["headers"]["X-Mailer"];			//'X-Mailer: PHP/' . phpversion();
-		mail($to, $subject, $message, $headers);
+	mail($to, $subject, $message/*, $headers*/);
 	}
 
 	function createMessage($message)
@@ -56,7 +56,7 @@
 	}
 	function linkToken($token)
 	{
-		return "<a href='verifyaccount.php?action=get&token=".$token."'>da</a>";
+		return "http://localhost:8080/Camagru/verifyaccount.php?action=get&token=".$token;
 	}
 	//$db->closeConnnections();
 ?>
