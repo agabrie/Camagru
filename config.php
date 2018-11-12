@@ -40,5 +40,23 @@
 						"X-Mailer: ".$mail["headers"]["X-Mailer"];			//'X-Mailer: PHP/' . phpversion();
 		mail($to, $subject, $message, $headers);
 	}
+
+	function createMessage($message)
+	{
+		$count = 0;
+
+		foreach($message as $paragraph)
+		{
+			if($count)
+				$final = $final."<br>".PHP_EOL;
+			$final = $final.$paragraph;
+			$count++;
+		}
+		return($final);
+	}
+	function linkToken($token)
+	{
+		return "<a href='verifyaccount.php?action=get&token=".$token."'>da</a>";
+	}
 	//$db->closeConnnections();
 ?>

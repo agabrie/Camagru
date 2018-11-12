@@ -5,7 +5,7 @@
 	/*************************** Insert new record into Database **************************/
 	// create token for verification
 	$token = hash("whirlpool", $_SESSION["username"].$_SESSION["email"]);
-	echo $token;
+	// echo $token;
 	error_log($token);
 	// columns needed to insert values into database
 	$columns	= array	(
@@ -49,6 +49,8 @@
 						"Reply-To"=>"",
 						"X-Mailer"=>""
 						);
+	$message = createMessage(array("Thank You for regstering with Camagru", "To activate your account please click on the link below.",linkToken($token),"or insert this into the token field:", $token, "Thank You for using Camagru"));
+	echo $message;
 	// call to send mail function from config.php
 	// sendMail(
 	// 			array	(
@@ -59,5 +61,5 @@
 	// 				)
 	// 		);
 	/**************************** Redirect to home page ******************************/
-	header("Location: index.php");
+	// header("Location: index.php");
 ?>
