@@ -3,7 +3,9 @@ session_start();
 include_once("config.php");
 if($_POST["btn"] == "login/signin")
     header("Location: register.php");
-if($_POST["btn"] == "Welcome ".$_SESSION["username"])
+if($_POST["btn"] == "Verify")
+    header("Location: verifyaccount.php");
+if($_POST["btn"] == "Welcome ".$_SESSION["fname"])
     header("Location: register.php");
 if($_POST["btn"] == "logout")
     header("Location: logout.php");
@@ -27,8 +29,14 @@ if($_POST["btn"] == "home")
                         if($_SESSION["username"] != "")
                         {
                             echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.$_SESSION["username"].'"></td>';
+                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.$_SESSION["fname"].'"></td>';
+                        if($_SESSION["verified"] != 1)
+                        {
+                            echo
+                            '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';
                         }
+                    }
+                        
                     ?>
                 </tr>
             </table>

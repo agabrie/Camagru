@@ -42,6 +42,7 @@
 		$_SESSION["fname"] = $records[0]["fname"];
 		$_SESSION["lname"] = $records[0]["lname"];
 		$_SESSION["email"] = $records[0]["email"];
+		// $_SESSION["verified"] = $records[0]["verified"];
 		// echo "password from DB : ".$records[0]["password"]."<br>";
 		// echo "input : ".hash("whirlpool", hash("whirlpool", $passwrd))."<br>";
 		$_SESSION["verified"]=$records[0]["verified"];
