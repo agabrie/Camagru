@@ -2,42 +2,61 @@
 	session_start();
 	include("config.php");
 	include("header.php");
+	echo "<br><br><br><br><div class='notification'>notification!!</div>";
+    echo '<script type="text/javascript">
+	$(function() {
+		$("div.notification").hide().fadeIn().delay(3000).fadeOut("slow");
+	}); 
+              </script>';
 	if($_POST["btn"] == "register")
 	{
 		switch(testErrors($_POST))
 		{
 			case 1:
-				echo "No First NAME";
+				$err = "No First NAME";
 				break;
 			case 2:
-				echo "No Last NAME";
+				$err = "No Last NAME";
 				break;
 			case 3:
-				echo "USERNAME already exists";
+				$err = "USERNAME already exists";
 				break;
 			case 4:
-				echo "No USERNAME";
+				$err = "No USERNAME";
 				break;
 			case 5:
-				echo "email already in use";
+				$err = "email already in use";
 				break;
 			case 6:
-				echo "No Email";
+				$err = "No Email";
 				break;
 			case 7:
-				echo "No Password";
+				$err = "No Password";
 				break;
 			case 8:
-				echo "Password not Strong Enough";
+				$err = "Password not Strong Enough";
 				break;
 			case 9:
-				echo "Passwords dont match";
+				$err = "Passwords dont match";
 				break;
 			default:
 				header("Location: confirm_reg.php");
 				break;
 		}
 		
+		// echo	"<div style='text-align: center;'><div id='errordiv'>$err</div></div>";
+				// "<script type='text/javascript'>
+				// $(
+				// 	function()
+				// 	{
+				// 		$('div.container').hide().fadeIn().delay(3000).fadeOut('slow');
+				// 	}
+				// );
+				// </script>";
+				// echo '<br><br><br><br><br><div class="notification">Notice: Foobar</div>';
+				// echo '<script language="JavaScript" type="text/">
+					// timedMsg("errordiv") 
+					//   </script>';
 	}
 	else if($_POST["btn"] == "back")
 	{
@@ -148,8 +167,27 @@
 					<linktext>Already Registered? Login <a href=login.php>here</a>.<br></linktext>
 					<input type="submit" class="submit_button" name="btn" value="register"/>
 					<input type="submit" class="submit_button" name="btn" value="back" />
+					<!-- <div class="notification">Notice: Foobar</div> -->
+					<!-- <script type="text/javascript">
+						$(
+							function()
+							{
+								$('div.notification').hide().fadeIn().delay(3000).fadeOut('slow');
+							}
+						);
+					</script> -->
 				</form>
 			</div>
 		<div>
+		
 	</body>
+	<script type="text/javascript">
+ 
+	function timedMsg(id)
+	{
+		$(function(){
+		document.getElementById(id).hide().fadeIn().delay(3000).fadeOut('slow');};)
+	}
+ 
+	</script>
 </html>

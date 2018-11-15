@@ -30,11 +30,7 @@ if($_POST["btn"] == "home")
                         {
                             echo
                             '<td><input type="submit" class="header_button" name="btn" value="Welcome '.$_SESSION["fname"].'"></td>';
-                        if($_SESSION["verified"] != 1)
-                        {
-                            echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';
-                        }
+                        
                     }
                         
                     ?>
@@ -47,6 +43,11 @@ if($_POST["btn"] == "home")
                     <?php
                         if($_SESSION["username"] != "")
                         {
+                            if($_SESSION["verified"] != 1)
+                            {
+                                echo
+                                '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';
+                            }
                             echo
                             '<td><input type="submit" class="header_button" name="btn" value="logout"></td>'.
                             '<td><input type="submit" class="header_button" name="btn" value="settings"></td>';
