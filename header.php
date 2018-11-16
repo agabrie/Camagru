@@ -26,12 +26,11 @@ if($_POST["btn"] == "home")
                 <tr>
                 <td><input type="submit" class="header_button" name="btn" value="home"></td>
                     <?php
-                        if($_SESSION["username"] != "")
+                        if(getValue($_SESSION["username"],"fname") != "no value returned")
                         {
                             echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.$_SESSION["fname"].'"></td>';
-                        
-                    }
+                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.getValue($_SESSION["username"],"fname").'"></td>';
+                        }
                         
                     ?>
                 </tr>
@@ -41,9 +40,9 @@ if($_POST["btn"] == "home")
             <table>
                 <tr>
                     <?php
-                        if($_SESSION["username"] != "")
+                        if(getValue($_SESSION["username"],"username") != "no value returned")
                         {
-                            if($_SESSION["verified"] != 1)
+                            if(getValue($_SESSION["username"], "verified") != 1)
                             {
                                 echo
                                 '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';

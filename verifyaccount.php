@@ -1,12 +1,8 @@
 <?php
     session_start();
-    // echo $_GET["token"];
     include ("header.php");
     if($_POST["btn"]=="verify")
     {
-        // $token = $_POST["token"];
-        // echo "token : ".$token."<br>";
-        // checkToken($_SESSION["username"],$token);
         switch(testErrors($_POST))
         {
             case 1:
@@ -27,17 +23,15 @@
 			return 0;
 		else
 			return 1;
-	}
+    }
     function checkToken($name, $token)
     {
         global $db;
-        $statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);
-        $records = $db->returnRecord($statement);
-        if($records[0]["token"] == $token)
+        
+        if(getValue($name, "token") == $token)
         {
-            $_SESSION["verified"] = 1;
-            $statement = "UPDATE USERS SET VERIFIED = 0 WHERE USERNAME = ".stringify($name);
-            $db->runStatement($statement);
+            $statement = "UPDATE USERS SET VERIFIED = 1 WHERE USERNAME = ".stringify($name);
+            $db->runStatement($db->getDBConn(),$statement);
         }else
             return 0;
         return 1;

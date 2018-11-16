@@ -95,6 +95,12 @@ class Db
 		
 		return($something->fetchAll());
 	}
+
+	function returnFirstRecord($statement)
+	{
+		$records = $this->returnRecord($statement);
+		return($records[0]);
+	}
 	function insertRecord($record)
 	{
 		$count 		= 0;

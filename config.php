@@ -58,5 +58,17 @@
 	{
 		return "http://localhost:8080/Camagru/verifyaccount.php?action=get&token=".$token;
 	}
+	function getValue($name,$value)
+	{
+		global $db;
+		$statement = $statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);
+		// echo $statement;
+		$records = $db->returnFirstRecord($statement);
+		if($records[$value])
+		{
+			return($records[$value]);
+		}
+		return("no value returned");
+	}
 	//$db->closeConnnections();
 ?>

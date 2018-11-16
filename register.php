@@ -2,12 +2,12 @@
 	session_start();
 	include("config.php");
 	include("header.php");
-	echo "<br><br><br><br><div class='notification'>notification!!</div>";
-    echo '<script type="text/javascript">
-	$(function() {
-		$("div.notification").hide().fadeIn().delay(3000).fadeOut("slow");
-	}); 
-              </script>';
+	// echo "<br><br><br><br><div class='notification'>notification!!</div>";
+    // echo '<script type="text/javascript">
+	// $(function() {
+	// 	$("div.notification").hide().fadeIn().delay(3000).fadeOut("slow");
+	// }); 
+    //           </script>';
 	if($_POST["btn"] == "register")
 	{
 		switch(testErrors($_POST))
@@ -44,7 +44,7 @@
 				break;
 		}
 		
-		// echo	"<div style='text-align: center;'><div id='errordiv'>$err</div></div>";
+		echo	"<div style='text-align: center;'><div id='errordiv'>$err</div></div>";
 				// "<script type='text/javascript'>
 				// $(
 				// 	function()
