@@ -55,8 +55,8 @@
 	$mail = array	(
 					"to"=>$_SESSION["email"],
 					"subject"=>"Camagru account Verification needed",
-					"message"=>$message,
-					"headers"=>$headers
+					"message"=>$message
+					// "headers"=>$headers
 					);
 	// print_r($mail);
 	sendMail($mail);

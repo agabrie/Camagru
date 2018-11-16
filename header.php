@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("config.php");
+include("config.php");
 if($_POST["btn"] == "login/signin")
     header("Location: register.php");
 if($_POST["btn"] == "Verify")

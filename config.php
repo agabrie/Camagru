@@ -1,5 +1,6 @@
 <?php
 	require("install.php");
+	session_start();
 	// global $db;
 	$db = new Db(
 				array	(
@@ -20,11 +21,13 @@
 						"galleryId INT(11) NOT NULL default '0'",
 						"token VARCHAR(255) not NULL"
 						);
+	
 	$db->createTABLE(
 					array	(	"name"		=>"USERS",
 								"columns"	=>$columns
 							)
 					);
+	
 	function stringify($string)
 	{
 		return "'".$string."'";

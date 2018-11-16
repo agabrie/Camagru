@@ -38,7 +38,7 @@ class Db
 	{
 		try
 		{
-			$statement = "CREATE TABLE  IF NOT EXISTS ".$table["name"];
+			$statement = "CREATE TABLE IF NOT EXISTS ".$table["name"];
 			$statement = $statement."(";
 			$count = 0;
 			foreach($table["columns"] as $column)
@@ -50,7 +50,9 @@ class Db
 				$count++;
 			}
 			$statement = $statement.")";
+			// echo $statement;
 			$this->runStatement($this->dbconn, $statement);
+			// echo "dadadadad";
 		}
 		catch(PDOException $e)
 		{

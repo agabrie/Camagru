@@ -16,7 +16,9 @@
 					<div class = "booth" >
 						<video id="video" class="videoElement" width="400" height="300"></video>
 						<button class="takepicture" onclick="takePic()">Take Picture</button>
-						<div id="booth2" class="booth2"></div>
+						<div id="booth2" class="booth2">
+							<canvas class="webcamma" id="canvas"></canvas>
+						</div>
 					</div>
 					<div class="container" id="side">
 						Side

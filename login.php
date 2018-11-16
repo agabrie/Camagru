@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include("config.php");
+	// include("config.php");
 	include("header.php");
 	if($_POST["btn"] == "login")
 	{
@@ -8,12 +8,13 @@
 		switch(testErrors($_POST))
 		{
 			case 1:
-				echo "Username or password is incorrect";
+				$err = "Username or password is incorrect";
 				break;
 			default:
 				header("Location: confirm_login.php");
 				break;
 		}
+		echo	"<div style='text-align: center;'><div id='errordiv'>$err</div></div>";
 	}
 	else if($_POST["btn"] == "back")
 	{

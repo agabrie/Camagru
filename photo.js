@@ -1,10 +1,12 @@
-(function(){
-	var video = document.getElementById('video');
-	// var vendorUrL = window.URL || window.webkitURL;
-	navigator.getMedia =    navigator.getUserMedia ||
+navigator.getMedia =    navigator.getUserMedia ||
 							navigator.webkitGetUserMedia ||
 							navigator.mozGetUserMedia||
 							navigator.msGetUserMedia;
+var context = canvas.getContext('2d');
+(function(){
+	var video = document.getElementById('video');
+	// var vendorUrL = window.URL || window.webkitURL;
+	
 	navigator.getMedia({
 		video: true,
 		audio: false
@@ -20,20 +22,24 @@
 	});
 })();
 
+function snap(){
+	canvas.width = video.clientWidth;
+	canvas.height = video.clientHeight;
+	context.drawImage(video, 0, 0);
+	document.getElementById("canvas").style.transform = "rotateY(180deg)";
+	document.getElementById("imageLoader").value="";
+}
+
 function takePic()
 {
 
 	var new_img = document.createElement("img");
 
-	var context;
-	var width = video.scrollWidth, height = video.scrollHeight;
+	
+	var width = video.scrollWidth;
+	var height = video.scrollHeight;
 
-	// var f_width = filter.offsetWidth, f_height = filter.offsetHeight;
-
-	// if (f_width == 0) {
-		// f_width = filter.offsetWidth;
-	// }
-	// if (f_height == 0) { f_height = filter.offsetHeight; }
+	
 	 if (fx == 0) { fx = width/100 * 40; }
 	 if (fy == 0) { fy = height/100 * 60; }
 	
@@ -41,10 +47,9 @@ function takePic()
 	 canvas.width = width;
 	 canvas.height = height;
 	
-	 context = canvas.getContext('2d');
+	 ;
 	 context.globalAlpha = 1.0;
 	 context.drawImage(video, 0, 0, width, height);
-	// context.drawImage(filter, fx, fy, f_width, f_height);
 	 new_img.src = canvas.toDataURL('image/png');
 	 new_img.setAttribute("width", "30%");
 	 new_img.onclick = function() {

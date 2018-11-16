@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include("config.php");
+	// include("config.php");
 	include("header.php");
 	// echo "<br><br><br><br><div class='notification'>notification!!</div>";
     // echo '<script type="text/javascript">
@@ -107,7 +107,12 @@
 		else
 			return 7;
 	}
-
+	// function checkString($string)
+	// {
+	// 	if(preg_match('/;/', $string) || $string == "")
+	// 		return 0;
+	// 	return 1;
+	// }
 	function checkUnique($condition,$value)
 	{
 		global $db;
@@ -181,7 +186,7 @@
 		<div>
 		
 	</body>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
  
 	function timedMsg(id)
 	{
@@ -189,5 +194,5 @@
 		document.getElementById(id).hide().fadeIn().delay(3000).fadeOut('slow');};)
 	}
  
-	</script>
+	</script> -->
 </html>
