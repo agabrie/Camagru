@@ -13,13 +13,17 @@
 				<div class="container" id="main">
 					<!-- Main -->
 					<!-- <br> -->
-					<div class = "booth" >
-						<video id="video" class="videoElement" width="400" height="300"></video>
-						<button class="takepicture" onclick="takePic()">Take Picture</button>
-						<div id="booth2" class="booth2">
+					<!-- <div width ="400px"> -->
+						<div class = "booth" >
+							<video id="video" class="videoElement" width="400" height="300"></video>	
+						<!-- </div> -->
+						<!-- <br> -->
+						<button class="takepicture" onclick="snap()">Take Picture</button>
+						<!-- <br> -->
+						<!-- <div class="booth2"> -->
 							<canvas class="webcamma" id="canvas"></canvas>
 						</div>
-					</div>
+					<!-- </div> -->
 					<div class="container" id="side">
 						Side
 					</div>

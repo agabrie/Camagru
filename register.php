@@ -39,6 +39,18 @@
 			case 9:
 				$err = "Passwords dont match";
 				break;
+			case 1000:
+				$err = "cant use stupid things in fname";
+				break;
+			case 1001:
+				$err = "cant use stupid things in lname";
+				break;
+			case 1002:
+				$err = "cant use stupid things in username";
+				break;
+			case 1003:
+				$err = "cant use stupid things in email";
+				break;
 			default:
 				header("Location: confirm_reg.php");
 				break;
@@ -68,6 +80,10 @@
 		// print_r($post);
 		if($post["fname"] != "")
 		{
+			if(preg_match('/[;"=:*?<>|]/',$post["fname"] ))
+			{
+				return 1000;
+			}
 			$_SESSION["fname"] = $post["fname"];
 		}
 		else
@@ -75,6 +91,10 @@
 
 		if($post["lname"] != "")
 		{
+			if(preg_match('/[;"=:*?<>|]/',$post["lname"] ))
+			{
+				return 1001;
+			}
 			$_SESSION["lname"] = $post["lname"];
 		}
 		else
@@ -82,6 +102,10 @@
 
 		if($post["username"] != "")
 		{
+			if(preg_match('/[;"=:*?<>|]/',$post["username"] ))
+			{
+				return 1002;
+			}
 			if(checkUnique("USERNAME",$post["username"]))
 				$_SESSION["username"] = $post["username"];
 			else
@@ -92,6 +116,10 @@
 
 		if($post["email"] != "")
 		{
+			if(preg_match('/[;"=:*?<>|]/',$post["email"] ))
+			{
+				return 1003;
+			}
 			if(checkUnique("EMAIL",$post["email"]))
 				$_SESSION["email"] = $post["email"];
 			else
@@ -161,7 +189,7 @@
 					<input type="text" name="username" value="<?php /*echo $_SESSION['username'];*/?>" /><br>
 					
 					<label for="email">Email:</label><br>
-					<input type="text" name="email" value="<?php /*echo $_SESSION['email'];*/?>" /><br>
+					<input type="email" name="email" value="<?php /*echo $_SESSION['email'];*/?>" /><br>
 					
 					<label for="passwrd">Password:</label><br>
 					<input type="password" name="passwrd" value="" /><br>
