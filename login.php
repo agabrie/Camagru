@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	// session_start();
 	// include("config.php");
 	include("header.php");
 	if($_POST["btn"] == "login")

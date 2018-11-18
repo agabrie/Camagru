@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include ("header.php");
+    // session_start();
+    include("header.php");
     if($_POST["btn"]=="verify")
     {
         switch(testErrors($_POST))

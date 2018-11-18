@@ -22,11 +22,23 @@
 						"token VARCHAR(255) not NULL"
 						);
 	
-	$db->createTABLE(
-					array	(	"name"		=>"USERS",
-								"columns"	=>$columns
-							)
-					);
+	$db->createTABLE	(
+						array	(	"name"		=>"USERS",
+									"columns"	=>$columns
+								)
+						);
+	
+	$imagecolumns = array	(
+							"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
+							"image LONGBLOB not NULL",
+							"userID INT NOT NULL default '0'",
+							"`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+							);
+	$db->createTABLE	(
+						array	(	"name"=>"IMAGES",
+									"columns"=>$imagecolumns
+								)
+						);
 	
 	function stringify($string)
 	{

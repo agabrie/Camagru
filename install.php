@@ -1,4 +1,5 @@
 <?php
+
 class Db
 {
 	private $servername ;
@@ -127,6 +128,7 @@ class Db
 			$count++;
 		}
 		$statement 	= $statement.");";
+		// echo $statement;
 		$this->runStatement($this->dbconn, $statement);
 	}
 }

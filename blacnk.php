@@ -5,7 +5,7 @@
     </head>
 <body>
     <div class = "booth" >
-    	<video id="video" style="z-index:5;position:relative;"width="400" height="300"></video>
+    <input type="file" name="file" id="file" class="inputfile" /><label for="file">Choose a file</label>
     </div>
     <script src="photo.js"></script>
 </body>

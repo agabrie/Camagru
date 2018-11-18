@@ -5,6 +5,9 @@
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+var imageLoader = document.getElementById('file');
+    		imageLoader.addEventListener('change', fetch, false);
+
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
 		navigator.mozGetUserMedia || navigator.oGetUserMedia || navigator.msGetUserMedia;
 
@@ -45,8 +48,40 @@ function snap(){
 	// context.drawImage(video, 0, 0);
 	context.drawImage(video,0,0,640,480,0,0,canvas.width,canvas.height);
 	document.getElementById("canvas").style.transform = "rotateY(180deg)";
-	// document.getElementById("imageLoader").value="";
+	imageLoader.value="";
 }
+
+function fetch(e){
+	var reader = new FileReader();
+	reader.onload = function(event){
+		var img = new Image();
+		img.onload = function(){
+			canvas.width = video.clientWidth;
+			canvas.height = video.clientHeight;
+			context.drawImage(img,0,0,img.width,img.height,0,0,canvas.width,canvas.height);
+		}
+		img.src = event.target.result;
+	}
+	reader.readAsDataURL(e.target.files[0]);
+	document.getElementById("canvas").style.transform = "rotateY(0deg)";
+}
+
+document.getElementById("add_gal").addEventListener("click", function(){
+	var img = new Image();
+	img.src = canvas.toDataURL();
+	var json = {
+				pikcha: img.src
+			}
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'saveimages.php', true);
+			xhr.setRequestHeader('Content-type', 'application/json');
+			xhr.onreadystatechange = function (data) {
+				 if (xhr.readyState == 4 && xhr.status == 200) {
+				 	console.log(xhr.responseText);
+				 }
+			}
+			xhr.send(JSON.stringify(json))
+});
 
 // function takePic()
 // {
