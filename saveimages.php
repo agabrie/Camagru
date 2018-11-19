@@ -8,6 +8,7 @@ if ($headers["Content-type"] == "application/json") {
     // var_dump($stuff);
 $fields = array(
     "image",
+    "imageName",
     "userID"
 );
 
@@ -15,9 +16,10 @@ $table = array(
     "name"      => "images",
     "columns"   => $fields
 );
-
+echo $stuff["picname"];
 $values = array(
                 stringify($stuff["pikcha"]),
+                stringify($stuff["picname"]),
                 getValue($_SESSION["username"], "userId")
                 // "1"
 );
@@ -29,4 +31,5 @@ $record = array (
 // echo $_SESSION["username"]."<br>".getValue($_SESSION["username"], "userId");
 $db->insertRecord($record);
 }
+// header("Location: index.php");
 ?>

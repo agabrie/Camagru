@@ -1,12 +1,14 @@
 body
 {
 	min-width: 990px;
+	font-family: 'Bobber';
 }
 .container
 {
 	background:		radial-gradient( rgb(70, 160, 150),rgb(40, 120, 110));
 	text-align:		center;
-	font-family: 	Georgia, 'Times New Roman', Times, serif;
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
 	margin:			auto;
 	
 	position:		relative;
@@ -15,6 +17,12 @@ body
 	font-size:		200%;
 	color:			white; 
 	
+}
+.usergallery
+{
+	font-size : 30%;
+	border: 5px double rgb(160, 70, 70);
+	margin:2px;
 }
 .videoElement
 {
@@ -94,7 +102,8 @@ body
 	font-size: 		100%;
 	background:		radial-gradient( rgb(160, 70, 70),rgb(120, 40, 40));
 	border:			1px solid rgb(120, 40, 40);
-	font-family: 	Georgia, 'Times New Roman', Times, serif;
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
 	text-align:		center;
 	border-radius:	30px 30px;
 	color:			white;
@@ -134,7 +143,8 @@ body
 	padding:		5%;
 	padding-top:	0;
 	padding-bottom:	0;
-	font-family: 	'Times New Roman', Times, sans-serif;
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
 }
 #main
 {
@@ -184,7 +194,8 @@ input[type=submit]
 input[type=email]
 {
 	font-size:		100%;
-	font-family:	'Times New Roman', Times, sans-serif;
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
 	text-align:		center;
 	color:			aquamarine;
 	background:		rgb(40, 120, 110);
@@ -194,7 +205,8 @@ input[type=email]
 input[type=text]
 {
 	font-size:		100%;
-	font-family:	'Times New Roman', Times, sans-serif;
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
 	text-align:		center;
 	color:			aquamarine;
 	background:		rgb(40, 120, 110);
@@ -205,7 +217,8 @@ input[type=text]
 input[type=password]
 {
 	font-size:		100%;
-	font-family:	'Calibri', Times, sans-serif;
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
 	text-align:		center;
 	color:			aquamarine;
 	background:		rgb(40, 120, 110);
@@ -216,6 +229,7 @@ input[type=password]
 .inputfile {
 	width: 0.1px;
 	height: 0.1px;
+	
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
@@ -224,8 +238,9 @@ input[type=password]
 .inputfile + label {
 	
 	margin:			10px 2px;
-	padding-top:	0%;
-	padding-bottom:	0%;
+	/* padding-top:	0%; */
+	padding	:		2px 10px;
+	/* padding-bottom:	0%; */
 	font-size:		30%;
 	background:		rgb(40, 120, 110);
 	border:			3px double aquamarine;
@@ -246,6 +261,59 @@ input[type=password]
 	font-family:	Calibri;
 	color:			white;
 
+}
+
+.picname
+{
+	text-align: center;
+	position:		relative;
+	/* top:			80px; */
+	margin:			10px 2px;
+	padding-top:	0%;
+	padding-bottom:	0%;
+	font-size:		100%;
+	background:		rgb(40, 120, 110);
+	border:			5px double aquamarine;
+	border-radius:	30% 30%;
+	font-family:	Calibri;
+	color:			white;
+}
+
+.savepicname
+{
+	width: fit-content;
+	text-align: center;
+	/* padding: 2px; */
+	margin:			0;
+	padding-top:	0%;
+	padding-bottom:	0%;
+	font-size:		100%;
+	background:		rgb(40, 120, 110);
+	border:			3px double aquamarine;
+	border-radius:	30% 30%;
+	font-family:	Calibri;
+	color:			white;
+}
+
+#tempdiv
+{
+	position: absolute;
+	width:			auto;
+	z-index:		20;
+	display:		inline-block;
+	padding:		5%;
+	padding-top:	0;
+	padding-bottom:	0;
+	font-size: 		30%;
+	background:		radial-gradient( rgb(160, 70, 70),rgb(120, 40, 40));
+	border:			1px solid rgb(120, 40, 40);
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
+	text-align:		center;
+	border-radius:	30px 30px;
+	color:			white;
+	margin:			auto;
+	position:		relative;
 }
 linktext
 {

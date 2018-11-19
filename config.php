@@ -31,6 +31,7 @@
 	$imagecolumns = array	(
 							"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
 							"image LONGBLOB not NULL",
+							"imageName VARCHAR(100) not NULL",
 							"userID INT NOT NULL default '0'",
 							"`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 							);
@@ -63,7 +64,7 @@
 		foreach($message as $paragraph)
 		{
 			if($count)
-				$final = $final."<br>".PHP_EOL;
+				$final = $final.PHP_EOL;
 			$final = $final.$paragraph;
 			$count++;
 		}
