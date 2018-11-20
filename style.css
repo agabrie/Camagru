@@ -21,7 +21,19 @@ body
 .usergallery
 {
 	font-size : 30%;
-	border: 5px double rgb(160, 70, 70);
+	border: 5px double aquamarine;
+	border-radius: 30%;
+	margin:2px;
+}
+.gallery
+{
+	width :20%;
+	font-family: 'Bobber';
+	color:			white;
+	text-align:		center;
+	font-size : 100%;
+	border: 5px double aquamarine;
+	border-radius: 30%;
 	margin:2px;
 }
 .videoElement
@@ -110,6 +122,26 @@ body
 	margin:			auto;
 	position:		relative;
 }
+#errorsdiv
+{
+	width:			auto;
+	top:			7.2vh;
+	z-index:		10;
+	display:		inline-block;
+	padding:		5%;
+	padding-top:	0;
+	padding-bottom:	0;
+	font-size: 		100%;
+	background:		radial-gradient( rgb(160, 70, 70),rgb(120, 40, 40));
+	border:			1px solid rgb(120, 40, 40);
+	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
+	font-family: 'Bobber';
+	text-align:		center;
+	border-radius:	30px 30px;
+	color:			white;
+	margin:			auto;
+	position:		relative;
+}
 #footing
 {
 	position:		fixed;
@@ -145,6 +177,7 @@ body
 	padding-bottom:	0;
 	/* font-family: 	Georgia, 'Times New Roman', Times, serif; */
 	font-family: 'Bobber';
+	overflow-y: auto;
 }
 #main
 {
@@ -313,6 +346,7 @@ input[type=password]
 	border-radius:	30px 30px;
 	color:			white;
 	margin:			auto;
+	margin-bottom: 5px;
 	position:		relative;
 }
 linktext

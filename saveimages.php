@@ -18,9 +18,9 @@ $table = array(
 );
 echo $stuff["picname"];
 $values = array(
-                stringify($stuff["pikcha"]),
+                stringify($stuff["pic"]),
                 stringify($stuff["picname"]),
-                getValue($_SESSION["username"], "userId")
+                getValue("username",$_SESSION["username"], "userId")
                 // "1"
 );
 $record = array (
@@ -28,8 +28,8 @@ $record = array (
                 "values"    => $values
                 );
 // print_r($stuff);
-// echo $_SESSION["username"]."<br>".getValue($_SESSION["username"], "userId");
+// echo $_SESSION["username"]."<br>".getValue("username",$_SESSION["username"], "userId");
 $db->insertRecord($record);
 }
-// header("Location: index.php");
+// header("Location: edit.php");
 ?>

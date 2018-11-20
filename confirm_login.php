@@ -3,6 +3,6 @@
     session_start();
     // print_r($_SESSION);
     
-/***************** Redirect to index **************/
-    header("Location: index.php");
+/***************** Redirect to edit **************/
+    header("Location: edit.php");
 ?>

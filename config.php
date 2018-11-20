@@ -74,10 +74,11 @@
 	{
 		return "http://localhost:8080/Camagru/verifyaccount.php?action=get&token=".$token;
 	}
-	function getValue($name,$value)
+	function getValue($field,$name,$value)
 	{
 		global $db;
-		$statement = $statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);
+		$statement = $statement = "SELECT * FROM USERS WHERE ".strtoupper($field)." = ".stringify($name);
+		// echo $statement;
 		// echo $statement;
 		$records = $db->returnFirstRecord($statement);
 		if($records[$value])
@@ -85,6 +86,11 @@
 			return($records[$value]);
 		}
 		return("no value returned");
+	}
+	function verifyemail($token)
+	{
+		$message = createMessage(array("Thank You for registering with Camagru", "To activate your account please click on the link below.",linkToken($token),"or insert this into the token field:", $token, "Thank You for using Camagru"));
+		return $message;
 	}
 	//$db->closeConnnections();
 ?>

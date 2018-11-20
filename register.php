@@ -72,7 +72,7 @@
 	}
 	else if($_POST["btn"] == "back")
 	{
-		header("Location: index.php");
+		header("Location: edit.php");
 	}
 
 	function testErrors($post)

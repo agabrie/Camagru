@@ -51,9 +51,18 @@ function fetch(e){
 	reader.readAsDataURL(e.target.files[0]);
 	document.getElementById("canvas").style.transform = "rotateY(0deg)";
 }
+function myFunction() {
+    
+}
 function create_button()
 {
-	if(i){
+	if(i == 1){
+		var x = document.getElementById("save_button");
+    	if (x.style.display === "none") {
+        	x.style.display = "block";
+    	} else {
+        	x.style.display = "none";
+    	}
 	// Your existing code unmodified...
 	var iDiv = document.createElement('div');
 	iDiv.id = 'tempdiv';
@@ -80,16 +89,17 @@ function create_button()
 	// The variable iDiv is still good... Just append to it.
 	iDiv.appendChild(butt);
 	
-	iDiv.style.zIndex = "10";
+	iDiv.style.zindex = "10";
 	document.getElementById("placeholder").appendChild(iDiv);
 	
 	
 	document.getElementById("add_gal").addEventListener("click", function(){
 		var img = new Image();
-		var nam = textBox.value.trim;
+		var nam = textBox.value;
+
 		img.src = canvas.toDataURL();
 		var json = {
-					pikcha: img.src,
+					pic: img.src,
 					picname: nam
 				}
 				var xhr = new XMLHttpRequest();
@@ -101,10 +111,14 @@ function create_button()
 					 }
 				}
 				xhr.send(JSON.stringify(json));
-				window.location = "index.php";
+				window.location = "edit.php";
 	 
 	});
 	}
+	
 }
 
+function viewmode()
+{
 
+}

@@ -6,7 +6,7 @@ if($_POST["btn"] == "login/signin")
 if($_POST["btn"] == "Verify")
     header("Location: verifyaccount.php");
 if($_POST["btn"] == "Welcome ".$_SESSION["fname"])
-    header("Location: register.php");
+    header("Location: edit.php");
 if($_POST["btn"] == "logout")
     header("Location: logout.php");
 if($_POST["btn"] == "settings")
@@ -26,10 +26,10 @@ if($_POST["btn"] == "home")
                 <tr>
                 <td><input type="submit" class="header_button" name="btn" value="home"></td>
                     <?php
-                        if(getValue($_SESSION["username"],"fname") != "no value returned")
+                        if(getValue("USERNAME",$_SESSION["username"],"fname") != "no value returned")
                         {
                             echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.getValue($_SESSION["username"],"fname").'"></td>';
+                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.getValue("username",$_SESSION["username"],"fname").'"></td>';
                         }
                         
                     ?>
@@ -40,9 +40,9 @@ if($_POST["btn"] == "home")
             <table>
                 <tr>
                     <?php
-                        if(getValue($_SESSION["username"],"username") != "no value returned")
+                        if(getValue("username",$_SESSION["username"],"username") != "no value returned")
                         {
-                            if(getValue($_SESSION["username"], "verified") != 1)
+                            if(getValue("username",$_SESSION["username"], "verified") != 1)
                             {
                                 echo
                                 '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';

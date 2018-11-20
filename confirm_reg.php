@@ -44,16 +44,17 @@
 
 	/************************* Send email to user's email address **********************/
 	// headers required for sending mail
+	
 	$headers = array	(
 						"From"=>"noreply@localhost.co.za",
 						"Reply-To"=>"noreply@localhost.co.za",
 						"X-Mailer"=>"PHP/".phpversion()
 						);
-	$message = createMessage(array("Thank You for registering with Camagru", "To activate your account please click on the link below.",linkToken($token),"or insert this into the token field:", $token, "Thank You for using Camagru"));
+	$message = verifyemail($token);
 	// echo $message;
 	// call to send mail function from config.php
 	$mail = array	(
-					"to"=>$_SESSION["email"],
+					"to"=>getValue("username",$_SESSION["username"], "email"),
 					"subject"=>"Camagru account Verification needed",
 					"message"=>$message
 					// "headers"=>$headers
@@ -61,5 +62,5 @@
 	// print_r($mail);
 	sendMail($mail);
 	/**************************** Redirect to home page ******************************/
-	header("Location: index.php");
+	header("Location: edit.php");
 ?>
