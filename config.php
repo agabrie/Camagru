@@ -148,6 +148,15 @@
 		}
 		return("no value returned");
 	}
+
+	function getNumLikes($imageID)
+	{
+		global $db;
+		$statement = "SELECT * FROM LIKES WHERE imageID = ".stringify($imageID);
+		$records = $db->returnRecord($statement);
+		return(count($records));
+	}
+	
 	function verifyemail($token)
 	{
 		$message = createMessage(array("Thank You for registering with Camagru", "To activate your account please click on the link below.",linkToken($token),"or insert this into the token field:", $token, "Thank You for using Camagru"));
