@@ -58,7 +58,7 @@
 							"userID INT NOT NULL default '0'"
 							);
 	$db->createTABLE	(
-						array	(	"name"=>"COMMENTS",
+						array	(	"name"=>"LIKES",
 									"columns"=>$likescolumns
 								)
 						);
@@ -113,6 +113,32 @@
 	{
 		global $db;
 		$statement = $statement = "SELECT * FROM IMAGES WHERE ".strtoupper($field)." = ".stringify($name);
+		// echo $statement;
+		// echo $statement;
+		$records = $db->returnFirstRecord($statement);
+		if($records[$value])
+		{
+			return($records[$value]);
+		}
+		return("no value returned");
+	}
+	function getCommentsValue($field,$name,$value)
+	{
+		global $db;
+		$statement = $statement = "SELECT * FROM COMMENTS WHERE ".strtoupper($field)." = ".stringify($name);
+		// echo $statement;
+		// echo $statement;
+		$records = $db->returnFirstRecord($statement);
+		if($records[$value])
+		{
+			return($records[$value]);
+		}
+		return("no value returned");
+	}
+	function getLikesValue($field,$name,$value)
+	{
+		global $db;
+		$statement = $statement = "SELECT * FROM LIKES WHERE ".strtoupper($field)." = ".stringify($name);
 		// echo $statement;
 		// echo $statement;
 		$records = $db->returnFirstRecord($statement);

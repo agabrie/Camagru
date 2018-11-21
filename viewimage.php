@@ -1,5 +1,6 @@
 <?php
 include("header.php");
+
 ?>
 <html>
 	<body>
@@ -10,10 +11,12 @@ include("header.php");
 			<div class="viewImage">
 				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image")?>">
 				<br>
-				
-					<button class="takepicture" style="font-size:100%;">likes <?php echo '2'; ?></button>
-					<input type="text" id="comment_button">
-					<button class="takepicture" style="font-size:100%;">comment</button>
+					
+					<input type="submit" class="takepicture" name="btn" style="font-size:60%;" value="<?php echo 'Likes '.'2'; ?>">
+					<input type="text" id="comm" name="comment" style="font-size:60%;">
+					<!-- <input type="submit" class="takepicture" name="btn" style="font-size:40%;" value="Comment"> -->
+					<button class="takepicture" style="font-size:60%;" onclick="comment_button(<?php echo getValue('username', $_SESSION['username'], 'userId') ?>, <?php echo $_GET['imageID'] ?>)">comment</button>
+					
 				<div class="comments">
 					<?php
 						$statement = "SELECT * FROM comments WHERE imageID=".$_GET["imageID"]." ORDER BY `date` DESC";
@@ -21,7 +24,7 @@ include("header.php");
 						$i = 0;
 						foreach($records as $comment)
 						{
-							echo getValue("userId", $comment["userID"], "username").PHP_EOL."			hello there dorkface";
+							echo "<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>".getValue("userId", $comment["userID"], "username")."</a>:\t".$comment["comment"]."<br><hr>";
 						}
 					?>
 					
@@ -29,70 +32,50 @@ include("header.php");
 			</div>
 		</div>
 		<script>
-			function comment_button(commentor)
+			var i = 1;
+			function comment_button(commentorID, imageID)
 			{
 				if(i == 1){
-					var x = document.getElementById("comment_button");
-    				if (x.style.display === "none") {
-    			    	x.style.display = "block";
-    				} else {
-    			    	x.style.display = "none";
-    				}
-					// Your existing code unmodified...
-					var iDiv = document.createElement('div');
-					iDiv.id = 'tempdiv';
-					iDiv.className = 'container';
-					// document.getElementsByTagName('body')[0].appendChild(iDiv);
-					
-					// Now create and append to iDiv
-					
-					// create text box to append to innerdiv
-					var textBox = document.createElement('input');
-					textBox.setAttribute('type', 'text');
-					textBox.setAttribute('value', '');
-					textBox.className ="picname";
-					iDiv.appendChild(textBox);
-					
-					// create button top submit picture name
-					var butt = document.createElement('input');
-					butt.setAttribute('type', 'button');
-					butt.setAttribute('value', 'Save');
-					butt.className = 'savepicname';
-					butt.id = 'add_comm';
-				
-				
-				// The variable iDiv is still good... Just append to it.
-					iDiv.appendChild(butt);
-				
-					iDiv.style.zindex = "10";
-					document.getElementById("placeholder").appendChild(iDiv);
-				
-				
-					document.getElementById("add_comm").addEventListener("click", function(){
-						var comment;
-						if(noSQLTest(textBox.value)){
-							comment = "";
-						}
-						else{
-							comment = textBox.value;
-						}
+					var comment;
+					var x;
+					var textBox = document.getElementById("comm");
+					if(noSQLTest(textBox.value)){
+						comment = "";
+						x = 0;
+					}
+					else{
+						comment = textBox.value;
+						x = 1;
+					}
+					if(comment == "")
+					{
+						x = 0;
+						// alert("commentor ID : "+commentorID + "\nimage ID : " + imageID + "\ncomment : " + comment + "\nx : " + x);
+					}
+					if(x){
 						var json = {
-									commenter: commenter,
-									comment: comment
-								}
-								var xhr = new XMLHttpRequest();
-								xhr.open('POST', 'savecomment.php', true);
-								xhr.setRequestHeader('Content-type', 'application/json');
-								xhr.onreadystatechange = function (data) {
-									 if (xhr.readyState == 4 && xhr.status == 200) {
-										 console.log(xhr.responseText);
-									 }
-								}
-								xhr.send(JSON.stringify(json));
-								// window.location = "edit.php";
-						
-					});
+								commentor: commentorID,
+								image: imageID,
+								comments: comment
+							}
+							// alert("commentor ID : "+commentorID + "\nimage ID : " + imageID + "\ncomment : " + comment);
+							var xhr = new XMLHttpRequest();
+							xhr.open('POST', 'savecomment.php', true);
+							xhr.setRequestHeader('Content-type', 'application/json');
+							xhr.onreadystatechange = function (data) {
+								 if (xhr.readyState == 4 && xhr.status == 200) {
+									 console.log(xhr.responseText);
+								 }
+							}
+							xhr.send(JSON.stringify(json));
+							// window.location = "edit.php";
+							window.location.reload();
+					}
 				}
+			}
+			function noSQLTest(str) {
+				var da = /[;"=:<>|]/.test(str);
+				return da;
 			}
 		</script>
 	</body>

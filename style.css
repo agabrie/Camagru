@@ -111,7 +111,7 @@ body
 	width: 400px;
 	margin: 10px auto;
 	text-align:left;
-	background:		radial-gradient( rgb(107, 107, 107),rgb(39, 39, 39));
+	/* background:		radial-gradient( rgb(107, 107, 107),rgb(39, 39, 39)); */
 	box-shadow:		-2px 0 1px black, 0 2px 1px black, 1px 0 black, 0 -1px black;
 	overflow:auto;
 }
@@ -245,6 +245,17 @@ body
 	border-radius:		10px;
 	background-color:	black;
 }
+.comments::-webkit-scrollbar
+{
+	width:			12px;
+	position: absolute;
+	margin: 5%;
+}
+.comments::-webkit-scrollbar-thumb
+{
+	border-radius:		10px;
+	background-color:	rgb(133, 15, 15);
+}
 /********************** buttons **************************/
 .header_button
 {
@@ -264,7 +275,7 @@ input[type=submit]
 	background:		rgb(39, 39, 39);
 	border:			3px double rgb(133, 15, 15);
 	border-radius:	30% 30%;
-	font-family:	Calibri;
+	font-family:	'Bobber';
 	color:			white;
 	box-shadow: -2px 0 1px black, 0 2px 1px black, 1px 0 black, 0 -1px black;
 }
@@ -404,4 +415,10 @@ a
 a.username
 {
 	color:white;
+}
+a.usercomment
+{
+	/* color: rgb(133, 15, 15); */
+	color: red;
+	text-shadow: none;
 }

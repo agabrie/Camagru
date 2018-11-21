@@ -51,9 +51,7 @@ function fetch(e){
 	reader.readAsDataURL(e.target.files[0]);
 	document.getElementById("canvas").style.transform = "rotateY(0deg)";
 }
-function myFunction() {
-    
-}
+
 function create_button()
 {
 	if(i == 1){

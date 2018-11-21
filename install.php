@@ -128,7 +128,7 @@ class Db
 			$count++;
 		}
 		$statement 	= $statement.");";
-		// echo $statement;
+		echo $statement;
 		$this->runStatement($this->dbconn, $statement);
 	}
 }
