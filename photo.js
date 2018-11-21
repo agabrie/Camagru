@@ -95,7 +95,13 @@ function create_button()
 	
 	document.getElementById("add_gal").addEventListener("click", function(){
 		var img = new Image();
-		var nam = textBox.value;
+		var nam;
+		if(noSQLTest(textBox.value)){
+			nam = "untitled.png";
+		}
+		else{
+			nam = textBox.value;
+		}
 
 		img.src = canvas.toDataURL();
 		var json = {
@@ -118,7 +124,7 @@ function create_button()
 	
 }
 
-function viewmode()
-{
-
+function noSQLTest(str) {
+	var da = /[;"=:*?<>|]/.test(str);
+	return da;
 }

@@ -40,6 +40,28 @@
 									"columns"=>$imagecolumns
 								)
 						);
+	$commentcolumns = array	(
+							"commentID INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
+							"comment varchar(255) not NULL",
+							"imageID INT not NULL",
+							"userID INT NOT NULL default '0'",
+							"`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+							);
+	$db->createTABLE	(
+						array	(	"name"=>"COMMENTS",
+									"columns"=>$commentcolumns
+								)
+						);
+	$likescolumns = array	(
+							"likeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY",
+							"imageID INT not NULL",
+							"userID INT NOT NULL default '0'"
+							);
+	$db->createTABLE	(
+						array	(	"name"=>"COMMENTS",
+									"columns"=>$likescolumns
+								)
+						);
 	
 	function stringify($string)
 	{
@@ -78,6 +100,19 @@
 	{
 		global $db;
 		$statement = $statement = "SELECT * FROM USERS WHERE ".strtoupper($field)." = ".stringify($name);
+		// echo $statement;
+		// echo $statement;
+		$records = $db->returnFirstRecord($statement);
+		if($records[$value])
+		{
+			return($records[$value]);
+		}
+		return("no value returned");
+	}
+	function getImageValue($field,$name,$value)
+	{
+		global $db;
+		$statement = $statement = "SELECT * FROM IMAGES WHERE ".strtoupper($field)." = ".stringify($name);
 		// echo $statement;
 		// echo $statement;
 		$records = $db->returnFirstRecord($statement);

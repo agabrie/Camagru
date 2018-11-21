@@ -5,7 +5,7 @@ if($_POST["btn"] == "login/signin")
     header("Location: register.php");
 if($_POST["btn"] == "Verify")
     header("Location: verifyaccount.php");
-if($_POST["btn"] == "Welcome ".$_SESSION["fname"])
+if($_POST["btn"] == "Camera")
     header("Location: edit.php");
 if($_POST["btn"] == "logout")
     header("Location: logout.php");
@@ -29,7 +29,7 @@ if($_POST["btn"] == "home")
                         if(getValue("USERNAME",$_SESSION["username"],"fname") != "no value returned")
                         {
                             echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Welcome '.getValue("username",$_SESSION["username"],"fname").'"></td>';
+                            '<td><input type="submit" class="header_button" name="btn" value="Camera"></td>';
                         }
                         
                     ?>
