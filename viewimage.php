@@ -11,7 +11,6 @@ include("header.php");
 			<div class="viewImage">
 				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image")?>">
 				<br>
-					
 					<button class="takepicture" style="font-size:60%;" onclick="likes_click(<?php if(getLikesValue('imageID', $_GET['imageID'], 'userID') == $_GET['userID']){echo 0;}else{echo 1;} ?>,<?php echo getValue('username', $_SESSION['username'], 'userId') ?>, <?php echo $_GET['imageID'] ?>)"><?php echo ((getLikesValue('imageID', $_GET['imageID'], 'userID') == $_GET['userID'])? "Unlike " : "Like ").getNumLikes($_GET["imageID"]); ?></button>
 					<input type="text" id="comm" name="comment" style="font-size:60%;">
 					<!-- <input type="submit" class="takepicture" name="btn" style="font-size:40%;" value="Comment"> -->
@@ -76,6 +75,10 @@ include("header.php");
 			function likes_click(x,likerID, imageID)
 			{
 				if(i == 1){
+					if(likerID == "no value returned")
+					{
+						window.location = "register.php";
+					}
 					var json;
 					if(x){
 						json = {

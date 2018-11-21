@@ -131,5 +131,9 @@ class Db
 		echo $statement;
 		$this->runStatement($this->dbconn, $statement);
 	}
+	function deleteRecord($unlikerID, $imageID)
+	{
+		$statement = "DELETE * FROM likes WHERE userID = $unlikerID AND imageID = $imageID";
+	}
 }
 ?>
