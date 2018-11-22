@@ -9,9 +9,10 @@ include("header.php");
 					<?php echo getImageValue("ID",$_GET["imageID"],"imageName") ?><br>
 					<br>
 			<div class="viewImage">
-				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image")?>">
+				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image");?>">
 				<br>
-					<button class="takepicture" style="font-size:60%;" onclick="likes_click(<?php if(getLikesValue('imageID', $_GET['imageID'], 'userID') == $_GET['userID']){echo 0;}else{echo 1;} ?>,<?php echo getValue('username', $_SESSION['username'], 'userId') ?>, <?php echo $_GET['imageID'] ?>)"><?php echo ((getLikesValue('imageID', $_GET['imageID'], 'userID') == $_GET['userID'])? "Unlike " : "Like ").getNumLikes($_GET["imageID"]); ?></button>
+					<?php echo getLikesValue('imageID', $_GET['imageID'], 'userID'); echo getValue("username", $_SESSION["username"], "userId");?>
+					<button class="takepicture" style="font-size:60%;" onclick="likes_click(<?php if(getLikesValue('imageID', $_GET['imageID'], 'userID') == getValue('username', $_SESSION['username'], 'userId')){echo 0;}else{echo 1;} ?>,<?php echo stringify(getValue('username', $_SESSION['username'], 'userId')) ?>, <?php echo $_GET['imageID'] ?>)"><?php echo ((getLikesValue('imageID', $_GET['imageID'], 'userID') == getValue("username", $_SESSION["username"], "userId"))? "Unlike " : "Like ").getNumLikes($_GET["imageID"]); ?></button>
 					<input type="text" id="comm" name="comment" style="font-size:60%;">
 					<!-- <input type="submit" class="takepicture" name="btn" style="font-size:40%;" value="Comment"> -->
 					<button class="takepicture" style="font-size:60%;" onclick="comment_button(<?php echo getValue('username', $_SESSION['username'], 'userId') ?>, <?php echo $_GET['imageID'] ?>)">comment</button>
@@ -79,30 +80,27 @@ include("header.php");
 					{
 						window.location = "register.php";
 					}
-					var json;
-					if(x){
-						json = {
+					
+					var jason = {
 								liker: likerID,
-								image: imageID
+								image: imageID,
+								liked: x
 							}
-					}else
-					{
-						json = {
-								unliker: likerID,
-								image: imageID
-							}
-					}
-					var xhr = new XMLHttpRequest();
-					xhr.open('POST', 'likeimage.php', true);
-					xhr.setRequestHeader('Content-type', 'application/json');
-					xhr.onreadystatechange = function (data) {
-						 if (xhr.readyState == 4 && xhr.status == 200) {
-							 console.log(xhr.responseText);
+					
+					var xmhr = new XMLHttpRequest();
+					xmhr.open('POST', 'likeimage.php', true);
+					
+					xmhr.setRequestHeader('Content-type', 'application/json');
+					xmhr.onreadystatechange = function (data) {
+						 if (xmhr.readyState == 4 && xmhr.status == 200) {
+							 console.log(xmhr.responseText);
 						 }
-					}
-					xhr.send(JSON.stringify(json));
+					};
+					alert("x : " + x + "\nlikerID : " + likerID + "\nimageID : " + imageID);
+					alert(JSON.stringify(jason));
+					xmhr.send(JSON.stringify(jason));
 					// window.location = "edit.php";
-					window.location.reload();
+					// window.location.reload();
 				}
 			}
 			function noSQLTest(str) {
