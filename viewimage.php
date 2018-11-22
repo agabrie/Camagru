@@ -11,8 +11,8 @@ include("header.php");
 			<div class="viewImage">
 				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image");?>">
 				<br>
-					<?php echo getLikesValue('imageID', $_GET['imageID'], 'userID'); echo getValue("username", $_SESSION["username"], "userId");?>
-					<button class="takepicture" style="font-size:60%;" onclick="likes_click(<?php if(getLikesValue('imageID', $_GET['imageID'], 'userID') == getValue('username', $_SESSION['username'], 'userId')){echo 0;}else{echo 1;} ?>,<?php echo stringify(getValue('username', $_SESSION['username'], 'userId')) ?>, <?php echo $_GET['imageID'] ?>)"><?php echo ((getLikesValue('imageID', $_GET['imageID'], 'userID') == getValue("username", $_SESSION["username"], "userId"))? "Unlike " : "Like ").getNumLikes($_GET["imageID"]); ?></button>
+					<?php /*echo getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID'); echo getValue("username", $_SESSION["username"], "userId");*/?>
+					<button class="takepicture" style="font-size:60%;" onclick="likes_click(<?php if((getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID')) == getValue('username', $_SESSION['username'], 'userId')){echo 0;}else{echo 1;} ?>,<?php echo stringify(getValue('username', $_SESSION['username'], 'userId')) ?>, <?php echo $_GET['imageID'] ?>)"><?php echo ((getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID') == getValue("username", $_SESSION["username"], "userId"))? "Unlike " : "Like ").getNumLikes($_GET["imageID"]); ?></button>
 					<input type="text" id="comm" name="comment" style="font-size:60%;">
 					<!-- <input type="submit" class="takepicture" name="btn" style="font-size:40%;" value="Comment"> -->
 					<button class="takepicture" style="font-size:60%;" onclick="comment_button(<?php echo getValue('username', $_SESSION['username'], 'userId') ?>, <?php echo $_GET['imageID'] ?>)">comment</button>
@@ -24,7 +24,8 @@ include("header.php");
 						$i = 0;
 						foreach($records as $comment)
 						{
-							echo "<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>".getValue("userId", $comment["userID"], "username")."</a>:\t".$comment["comment"]."<br><hr>";
+							$commentreplaced = (preg_replace("/[%01]/","'",$comment["comment"]))?preg_replace("/%01/","'",$comment["comment"]) : $comment["comment"];
+							echo "<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>".getValue("userId", $comment["userID"], "username")."</a>:\t".$commentreplaced."<br><hr>";
 						}
 					?>
 					
@@ -39,7 +40,9 @@ include("header.php");
 					var comment;
 					var x;
 					var textBox = document.getElementById("comm");
+					textBox.value = textBox.value.replace(/'/g,"%01");
 					if(noSQLTest(textBox.value)){
+						
 						comment = "";
 						x = 0;
 					}
@@ -69,7 +72,7 @@ include("header.php");
 							}
 							xhr.send(JSON.stringify(json));
 							// window.location = "edit.php";
-							window.location.reload();
+							document.location.reload(true);
 					}
 				}
 			}
@@ -96,11 +99,9 @@ include("header.php");
 							 console.log(xmhr.responseText);
 						 }
 					};
-					alert("x : " + x + "\nlikerID : " + likerID + "\nimageID : " + imageID);
-					alert(JSON.stringify(jason));
 					xmhr.send(JSON.stringify(jason));
 					// window.location = "edit.php";
-					// window.location.reload();
+					document.location.reload(true);
 				}
 			}
 			function noSQLTest(str) {

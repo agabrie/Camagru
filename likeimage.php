@@ -14,12 +14,11 @@ if ($headers["Content-type"] == "application/json") {
 		$record = array("table"=>$table, "values" =>$values);
 		print_r($record);
 		$db->insertRecord($record);
-		echo "<script type='text/javascript'> window.location.reload(); </script>";
 	}else
 	{
+		echo "<script> console.log('ada')</script>";
 		// $values = array(stringify($stuff["unlikerID"]), stringify($stuff["imageID"]));
 		// $record = array("table"=>$table, "values" =>$values);
-
 		$db->deletelikeRecord($stuff["liker"], $stuff["image"]);
 	}
 }

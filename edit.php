@@ -54,6 +54,12 @@
 					</div>
 					<div class="container" id="filters">
 						filters
+						<button onclick="resetcanvas()">Reset</button>
+						<button onclick="applytocanvas()">apply</button>
+						<img src='filter.png' id='filter1' width='80%' onclick='setsticker()'>
+						<img src='filter.png' id='filter2' width='80%' onclick='setsticker()'>
+						<img src='filter.png' id='filter3' width='80%' onclick='setsticker()'>
+						<img src='filter.png' id='filter4' width='80%' onclick='setsticker()'>
 					</div>
 				</div>
 				

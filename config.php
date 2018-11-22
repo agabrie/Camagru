@@ -135,17 +135,24 @@
 		}
 		return("no value returned");
 	}
-	function getLikesValue($field,$name,$value)
+	function getLikesValue($fields,$name,$value)
 	{
 		global $db;
-		$statement = $statement = "SELECT * FROM LIKES WHERE ".strtoupper($field)." = ".stringify($name);
+		$statement = $statement = "SELECT * FROM LIKES WHERE ".strtoupper($fields[0])." = ".stringify($name[0]);
+		if(count($fields) > 1)
+		{
+			$i = 1;
+			while($i < count($fields))
+			{
+				$statement .= " AND ".strtoupper($fields[$i])." = ".stringify($name[$i]);
+				$i++;
+			}
+		}
 		// echo $statement;
 		// echo $statement;
 		$records = $db->returnFirstRecord($statement);
 		if($records[$value])
-		{
-			return($records[$value]);
-		}
+				return($records[$value]);
 		return("no value returned");
 	}
 
