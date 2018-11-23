@@ -169,5 +169,41 @@
 		$message = createMessage(array("Thank You for registering with Camagru", "To activate your account please click on the link below.",linkToken($token),"or insert this into the token field:", $token, "Thank You for using Camagru"));
 		return $message;
 	}
+
+	function checkUnique($condition,$value)
+	{
+		global $db;
+
+		$statement = "SELECT * FROM USERS WHERE ".$condition." = ".stringify($value).";";
+		$records = $db->returnRecord($statement);
+		// echo "<script language='javascript'>alert(".print_r($records).")</script>";
+		return (!count($records));
+	}
+	
+	function validate_password($pwrd, $confpwrd)
+	{
+		echo "<script> alert('passwords newpass : ".$pwrd." and currpass : ".$confpwrd." validated');</script>";
+		$hashed1 = hash("whirlpool",hash("whirlpool",$pwrd));
+		$hashed2 = hash("whirlpool",hash("whirlpool",$confpwrd));
+		echo "<script> alert('passwords newpass : ".$hashed1." and currpass : ".$hashed2." validated');</script>";
+		if($hashed1 === $hashed2)
+		{
+			echo "<script> alert('yay validated');</script>";
+			if(strlen($pwrd) >= 8 && preg_match('/[A-Z]/', $pwrd) && preg_match('/[a-z]/', $pwrd) && preg_match('/[0-9]/', $pwrd))
+			{
+				echo "<script> alert('password is valid');</script>";
+				$_SESSION["passwrd"] = $hashed1;
+				return(0);
+			}
+			else
+			{
+				return 8;
+			}
+		}
+		else
+		{
+			return 9;
+		}
+	}
 	//$db->closeConnnections();
 ?>

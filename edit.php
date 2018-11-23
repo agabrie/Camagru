@@ -1,13 +1,14 @@
 <?php
 	include("header.php");
 	// include_once("config.php");
+	// echo $_SESSION["username"],getValue("username",$_SESSION["username"],"userId");
 	if(getValue("username",$_SESSION["username"],"userId") == "no value returned")
 	{
 		echo	"<div style='text-align: center;'><div id='errorsdiv'> You must login to save pictures. </div></div>";
 	}
 	else
 	{
-		if(getValue("username",$_SESSION["username"],"verified") != "1")
+		if(getValue("username",$_SESSION["username"],"verified") == "0")
 			echo	"<div style='text-align: center;'><div id='errorsdiv'>You must verify your account</div></div>";
 	}
 ?>
@@ -27,7 +28,7 @@
 							<button class="takepicture" onclick="snap()">take picture</button><!--
 							--><input type="file" name="file" id="file" class="inputfile" /><label for="file">upload file</label><!--
 							--><?php
-									if(getValue("username",$_SESSION["username"],"verified") == "1")
+									if((int)getValue("username",$_SESSION["username"],"verified") > 0)
 									{
 										echo '<button class="takepicture" id="save_button" onclick="create_button()">save picture</button>';
 									}

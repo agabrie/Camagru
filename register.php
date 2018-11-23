@@ -141,37 +141,9 @@
 	// 		return 0;
 	// 	return 1;
 	// }
-	function checkUnique($condition,$value)
-	{
-		global $db;
-
-		$statement = "SELECT * FROM USERS WHERE ".$condition." = ".stringify($value).";";
-		$records = $db->returnRecord($statement);
-		// echo "<script language='javascript'>alert(".print_r($records).")</script>";
-		return (!count($records));
-	}
 	
-	function validate_password($pwrd, $confpwrd)
-	{
-		$hashed1 = hash("whirlpool",hash("whirlpool",$pwrd));
-		$hashed2 = hash("whirlpool",hash("whirlpool",$confpwrd));
-		if($hashed1 === $hashed2)
-		{
-			if(strlen($pwrd) >= 8 && preg_match('/[A-Z]/', $pwrd) && preg_match('/[a-z]/', $pwrd) && preg_match('/[0-9]/', $pwrd))
-			{
-				$_SESSION["passwrd"] = $hashed1;
-				return(0);
-			}
-			else
-			{
-				return 8;
-			}
-		}
-		else
-		{
-			return 9;
-		}
-	}
+	
+	
 ?>
 
 <html>

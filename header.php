@@ -21,7 +21,7 @@ if($_POST["btn"] == "home")
 			CAMAGRU
 		</div>
         <form action="" method="post">
-            <div style="position:fixed;leftt:1vw;z-index:10;">
+            <div id="left_side">
             <table>
                 <tr>
                 <td><input type="submit" class="header_button" name="btn" value="home"></td>
@@ -36,13 +36,13 @@ if($_POST["btn"] == "home")
                 </tr>
             </table>
             </div>
-            <div style="position:fixed;right:1vw;z-index:10;">
+            <div id="right_side" >
             <table>
                 <tr>
                     <?php
                         if(getValue("username",$_SESSION["username"],"username") != "no value returned")
                         {
-                            if(getValue("username",$_SESSION["username"], "verified") != 1)
+                            if(getValue("username",$_SESSION["username"], "verified") == 0)
                             {
                                 echo
                                 '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';

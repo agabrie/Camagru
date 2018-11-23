@@ -63,7 +63,7 @@
 					<label for="passwrd">Confirm Password:</label><br>
 					<input type="password" name="passwrd" value="" /><br>
 
-					<linktext>Forgot Password?<br>Reset password <a href=login.php>here</a>.<br></linktext>
+					<linktext>Forgot Password?<br>Reset password <a href=resetpassword.php>here</a>.<br></linktext>
 					<input type="submit" class="submit_button" name="btn" value="login"/>
 					<input type="submit" class="submit_button" name="btn" value="back" />
 				</form>
