@@ -92,9 +92,9 @@
 		}
 		return($final);
 	}
-	function linkToken($token)
+	function linkToken($page,$token)
 	{
-		return "http://localhost:8080/Camagru/verifyaccount.php?action=get&token=".$token;
+		return "http://localhost:8080/Camagru/".$page."?action=get&token=".$token[0];
 	}
 	function getValue($field,$name,$value)
 	{
@@ -166,10 +166,26 @@
 	
 	function verifyemail($token)
 	{
-		$message = createMessage(array("Thank You for registering with Camagru", "To activate your account please click on the link below.",linkToken($token),"or insert this into the token field:", $token, "Thank You for using Camagru"));
+		$message = createMessage(array	("Thank You for registering with Camagru",
+										"To activate your account please click on the link below.",
+										linkToken('verifyaccount.php',$token),
+										"or insert this into the token field : ",
+										$token,
+										"Thank You for using Camagru"
+										)
+								);
 		return $message;
 	}
 
+	function resetpassword($token, $email)
+	{
+		$message = createMessage(array	("Your password for ".stringify(getValue("email", $email, "username"))." has been set to : ",
+										$token,
+										"Thank You for using Camagru"
+										)
+								);
+		return $message;
+	}
 	function checkUnique($condition,$value)
 	{
 		global $db;

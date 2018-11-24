@@ -3,7 +3,7 @@ include("header.php");
 ?>
 <html>
 <body>
-<div class="container" id="home">
+<div class="container" id="home" style="max-height:86%;">
 	Welcome<br>
 	<?php if($_SESSION["username"]) echo getValue("username",$_SESSION["username"],"fname") ?><br>
 	<br>
@@ -24,7 +24,7 @@ include("header.php");
 			}
 			
 		}
-		echo "</tr></table>";
+		echo "</tr></table><br>";
 	?>
 </div>
 </body>
