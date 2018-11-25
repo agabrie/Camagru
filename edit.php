@@ -1,15 +1,22 @@
 <?php
 	include("header.php");
-	// include_once("config.php");
-	// echo $_SESSION["username"],getValue("username",$_SESSION["username"],"userId");
+
 	if(getValue("username",$_SESSION["username"],"userId") == "no value returned")
 	{
-		echo	"<div style='text-align: center;'><div id='errorsdiv'> You must login to save pictures. </div></div>";
+		echo	"<div style='text-align: center;'>
+					<div id='errorsdiv'>
+						You must login to save pictures.
+					</div>
+				</div>";
 	}
 	else
 	{
 		if(getValue("username",$_SESSION["username"],"verified") == "0")
-			echo	"<div style='text-align: center;'><div id='errorsdiv'>You must verify your account</div></div>";
+			echo	"<div style='text-align: center;'>
+						<div id='errorsdiv'>
+							You must verify your account
+						</div>
+					</div>";
 	}
 ?>
 
@@ -20,20 +27,19 @@
 				<?php echo "Gallery" ?><br>
 				<br>
 				<div class="container" id="main">
-					<!-- Main -->
 					<div class="booth" >
-						<video id="video" class="videoElement" width="400" height="300"></video>	
-						<!-- <input type="button" class="takepicture" onclick="snap()" value="Take Picture"><input type="button" class="takepicture" onclick="snap()" value="Take Picture"> -->
+								
+						<video id="video" class="videoElement" width="400" height="300"></video>
 						<div id="placeholder">
 							<button class="takepicture" onclick="snap()">take picture</button><!--
 							--><input type="file" name="file" id="file" class="inputfile" /><label for="file">upload file</label><!--
-							--><?php
+							-->
+								<?php
 									if((int)getValue("username",$_SESSION["username"],"verified") > 0)
-									{
 										echo '<button class="takepicture" id="save_button" onclick="create_button()">save picture</button>';
-									}
 								?>
 						</div>
+						<img id='filteroverlay' style='height:300px;width:400px;position:absolute;z-index:7'>
 						<canvas class="webcamma" id="canvas"></canvas>
 					</div>
 					<div class="container" id="side">
@@ -42,14 +48,15 @@
 							if(getValue("username",$_SESSION["username"], "userId") != "no value returned")
 							{
 							$statement = "SELECT * FROM images WHERE userId = ".getValue("username",$_SESSION["username"], "userId")." ORDER BY `date` DESC";
-							// echo $statement;
 							$records = $db->returnRecord($statement);
 							foreach($records as $image)
 							{
-								echo "<div class='usergallery'><img src=".$image["image"]." style='width:100%;border-radius:30% 30% 15% 15%;' onclick='viewmode()'>".$image["imageName"]."</div>";
+								echo	"<div class='usergallery'>
+											<a href='viewimage.php?imageID=".$image["id"]."&userID=".$image["userID"]."'>
+												<img src=".$image["image"]." style='width:100%;border-radius:30% 30% 30% 30%;'>
+											</a>".$image["imageName"]."
+										</div>";
 							}
-							// print_r($records);
-							// echo $statement;
 						}
 						?>
 					</div>
@@ -57,10 +64,10 @@
 						filters
 						<button onclick="resetcanvas()">Reset</button>
 						<button onclick="applytocanvas()">apply</button>
-						<img src='filter.png' id='filter1' width='80%' onclick='setsticker()'>
-						<img src='filter.png' id='filter2' width='80%' onclick='setsticker()'>
-						<img src='filter.png' id='filter3' width='80%' onclick='setsticker()'>
-						<img src='filter.png' id='filter4' width='80%' onclick='setsticker()'>
+						<img src='filter.png' id='filter1' width='80%' onclick='setsticker(id)'>
+						<img src='filter.png' id='filter2' width='80%' onclick='setsticker(id)'>
+						<img src='filter.png' id='filter3' width='80%' onclick='setsticker(id)'>
+						<img src='filter.png' id='filter4' width='80%' onclick='setsticker(id)'>
 					</div>
 				</div>
 				

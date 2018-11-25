@@ -14,24 +14,36 @@
 	{
 		echo $_SESSION["username"];
 		if(preg_match('/[;"=:*?<>|]/',$_POST["username"] )){
-			echo	"<div style='text-align: center;'><div id='errordiv'> No or Invalid Username format </div></div>";
+			echo	"<div style='text-align: center;'>
+						<div id='errordiv'>
+							No or Invalid Username format
+						</div>
+					</div>";
 		}else{
 			if(checkUnique("username", $_POST["username"])){
 				$statement = "UPDATE users SET username = ".stringify($_POST["username"])." WHERE username = ".stringify($_SESSION["username"]);
 				$_SESSION["username"] = $_POST["username"];
-				echo $statement;
 				$db->runStatement($db->getDBConn(),$statement);
 			}
 			else
 			{
-				echo	"<div style='text-align: center;'><div id='errordiv'> Username already taken </div></div>";
+				echo	"<div style='text-align: center;'>
+							<div id='errordiv'>
+								Username already taken
+							</div>
+						</div>";
 			}
 		}
 	}
+	
 	if($_POST["btn"] == "Change Email Address")
 	{
 		if(preg_match('/[;"=:*?<>|]/',$_POST["email"] )){
-			echo	"<div style='text-align: center;'><div id='errordiv'> No or Invalid email format </div></div>";
+			echo	"<div style='text-align: center;'>
+						<div id='errordiv'>
+							No or Invalid email format
+						</div>
+					</div>";
 		}else{
 			if(checkUnique("email", $_POST["email"])){
 				$statement = "UPDATE users SET email = ".stringify($_POST["email"])." WHERE username = ".stringify($_SESSION["username"]).";";
@@ -39,40 +51,49 @@
 			}
 			else
 			{
-				echo	"<div style='text-align: center;'><div id='errordiv'> email address already taken </div></div>";
+				echo	"<div style='text-align: center;'>
+							<div id='errordiv'>
+								email address already taken
+							</div>
+						</div>";
 			}
 		}
 	}
+
 	if($_POST["btn"] == "Change Password")
 	{
-		echo "<script>alert('htigs');</script>";
 		if(preg_match('/[;"=:*?<>|]/',$_POST["newpass"]))
 		{
-			echo "<script> alert('No or Invalid password');</script>";
-			echo	"<div style='text-align: center;'><div id='errordiv'> No or Invalid password </div></div>";
+			echo	"<div style='text-align: center;'>
+						<div id='errordiv'>
+							No or Invalid password
+						</div>
+					</div>";
 		}
 		else
 		{
-			// echo "<script>alert('newpass : ".$_POST["newpass"]." and currpass : ');</script>";
-			echo "<script> alert('newpass : ".$_POST["newpass"]." and verpass : ".$_POST["verpass"]." being compared');</script>";
 			if(!validate_password($_POST["newpass"], $_POST["verpass"]))
 			{
-				echo "<script> alert('".getValue("username", $_SESSION["username"], "password")." vs ".hash("whirlpool", hash("whirlpool", $_POST["currpass"]))."');</script>";
 				if(getValue("username", $_SESSION["username"], "password") === hash("whirlpool", hash("whirlpool", $_POST["currpass"])))
 				{
 					$statement = "UPDATE users SET `password` = ".stringify(hash("whirlpool", hash("whirlpool", $_POST["newpass"])))." WHERE username = ".stringify($_SESSION["username"]);
-					echo "<script> alert('".$statement."');</script>";
 					$db->runStatement($db->getDBConn(),$statement);
 				}else
 				{
-					echo "<script> alert('password Entered Incorrect');</script>";
-					echo	"<div style='text-align: center;'><div id='errordiv'> Password Entered Incorrect </div></div>";
+					echo	"<div style='text-align: center;'>
+								<div id='errordiv'>
+									Password Entered Incorrect
+								</div>
+							</div>";
 				}
 			}
 			else
 			{
-				echo "<script> alert('Passwords dont match');</script>";
-				echo	"<div style='text-align: center;'><div id='errordiv'> Passwords don't match </div></div>";
+				echo	"<div style='text-align: center;'>
+							<div id='errordiv'>
+								Passwords don't match
+							</div>
+						</div>";
 			}
 		}
 	}

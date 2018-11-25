@@ -1,22 +1,38 @@
 <?php
 include("header.php");
-
 ?>
 <html>
 	<body>
 		<div class="container" id="home">
-					<?php echo getValue("userId",$_GET["userID"],"username")."'s" ?><br>
-					<?php echo getImageValue("ID",$_GET["imageID"],"imageName") ?><br>
-					<br>
+			<?php echo getValue("userId",$_GET["userID"],"username")."'s" ?><br>
+			<?php echo getImageValue("ID",$_GET["imageID"],"imageName") ?><br>
+			<br>
 			<div class="viewImage">
-				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image");?>">
-				<br>
-					<?php /*echo getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID'); echo getValue("username", $_SESSION["username"], "userId");*/?>
-					<button class="takepicture" style="font-size:60%;" onclick="likes_click(<?php if((getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID')) == getValue('username', $_SESSION['username'], 'userId')){echo 0;}else{echo 1;} ?>,<?php echo stringify(getValue('username', $_SESSION['username'], 'userId')) ?>, <?php echo $_GET['imageID'] ?>)"><?php echo ((getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID') == getValue("username", $_SESSION["username"], "userId"))? "Unlike " : "Like ").getNumLikes($_GET["imageID"]); ?></button>
+				<img src="<?php echo getImageValue("ID",$_GET["imageID"],"image");?>"><br>
+					<button class="takepicture" style="font-size:60%;" onclick="likes_click(
+							<?php
+									if((getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID')) == getValue('username', $_SESSION['username'], 'userId'))
+									{
+										echo 0;
+									}
+									else
+									{
+										echo 1;
+									} 
+							?>,
+							<?php echo stringify(getValue('username', $_SESSION['username'], 'userId')) ?>,
+							<?php echo $_GET['imageID'] ?>)">
+							<?php echo ((getLikesValue(array('imageID','userID'), array($_GET['imageID'],getValue('username', $_SESSION['username'], 'userId')), 'userID') == getValue("username", $_SESSION["username"], "userId"))? "Unlike " : "Like ").
+									getNumLikes($_GET["imageID"]);
+							?>
+							</button>
 					<input type="text" id="comm" name="comment" style="font-size:60%;">
-					<!-- <input type="submit" class="takepicture" name="btn" style="font-size:40%;" value="Comment"> -->
-					<button class="takepicture" style="font-size:60%;" onclick="comment_button(<?php echo getValue('username', $_SESSION['username'], 'userId') ?>, <?php echo $_GET['imageID'] ?>)">comment</button>
-					
+					<button class="takepicture" style="font-size:60%;" onclick="comment_button(
+								<?php echo getValue('username', $_SESSION['username'], 'userId') ?>,
+								<?php echo $_GET['imageID'] ?>
+							)">
+							comment
+					</button>
 				<div class="comments">
 					<?php
 						$statement = "SELECT * FROM comments WHERE imageID=".$_GET["imageID"]." ORDER BY `date` DESC";
@@ -25,7 +41,12 @@ include("header.php");
 						foreach($records as $comment)
 						{
 							$commentreplaced = (preg_replace("/[%01]/","'",$comment["comment"]))?preg_replace("/%01/","'",$comment["comment"]) : $comment["comment"];
-							echo "<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>".getValue("userId", $comment["userID"], "username")."</a>:\t".$commentreplaced."<br><hr>";
+							echo	"<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>
+										".getValue("userId", $comment["userID"], "username")."
+									</a>:\t".
+										$commentreplaced.
+									"<br>
+									<hr>";
 						}
 					?>
 					
@@ -53,7 +74,6 @@ include("header.php");
 					if(comment == "")
 					{
 						x = 0;
-						// alert("commentor ID : "+commentorID + "\nimage ID : " + imageID + "\ncomment : " + comment + "\nx : " + x);
 					}
 					if(x){
 						var json = {
@@ -61,7 +81,6 @@ include("header.php");
 								image: imageID,
 								comments: comment
 							}
-							// alert("commentor ID : "+commentorID + "\nimage ID : " + imageID + "\ncomment : " + comment);
 							var xhr = new XMLHttpRequest();
 							xhr.open('POST', 'savecomment.php', true);
 							xhr.setRequestHeader('Content-type', 'application/json');
@@ -71,7 +90,6 @@ include("header.php");
 								 }
 							}
 							xhr.send(JSON.stringify(json));
-							// window.location = "edit.php";
 							document.location.reload(true);
 					}
 				}
@@ -100,7 +118,6 @@ include("header.php");
 						 }
 					};
 					xmhr.send(JSON.stringify(jason));
-					// window.location = "edit.php";
 					document.location.reload(true);
 				}
 			}

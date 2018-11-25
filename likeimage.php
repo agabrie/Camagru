@@ -1,7 +1,5 @@
 <?php
 include('header.php');
-// session_start();
-// include("config.php");
 $headers = getallheaders();
 if ($headers["Content-type"] == "application/json") {
 	$stuff = json_decode(file_get_contents("php://input"), true);
@@ -16,9 +14,6 @@ if ($headers["Content-type"] == "application/json") {
 		$db->insertRecord($record);
 	}else
 	{
-		echo "<script> console.log('ada')</script>";
-		// $values = array(stringify($stuff["unlikerID"]), stringify($stuff["imageID"]));
-		// $record = array("table"=>$table, "values" =>$values);
 		$db->deletelikeRecord($stuff["liker"], $stuff["image"]);
 	}
 }

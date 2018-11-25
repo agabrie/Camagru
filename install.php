@@ -40,20 +40,18 @@ class Db
 		try
 		{
 			$statement = "CREATE TABLE IF NOT EXISTS ".$table["name"];
-			$statement = $statement."(";
+			$statement .= "(";
 			$count = 0;
 			foreach($table["columns"] as $column)
 			{
 				if ($count != 0)
-					$statement = $statement.",".$column;
+					$statement .= ",".$column;
 				else
-					$statement = $statement.$column;
+					$statement .= $column;
 				$count++;
 			}
-			$statement = $statement.")";
-			// echo $statement;
+			$statement .= ")";
 			$this->runStatement($this->dbconn, $statement);
-			// echo "dadadadad";
 		}
 		catch(PDOException $e)
 		{
@@ -95,7 +93,6 @@ class Db
 	function returnRecord($statement)
 	{
 		$something = $this->runStatement($this->dbconn, $statement);
-		
 		return($something->fetchAll());
 	}
 
@@ -108,27 +105,26 @@ class Db
 	{
 		$count 		= 0;
 		$statement 	= "INSERT INTO ".$record["table"]["name"];
-		$statement 	= $statement."(";
+		$statement 	.= "(";
 		foreach($record["table"]["columns"] as $column)
 		{
 			if($count != 0)
-				$statement = $statement.",".$column;
+				$statement .= ",".$column;
 			else
-				$statement = $statement.$column;
+				$statement .= $column;
 			$count++;
 		}
 		$count 		= 0;
-		$statement = $statement.") VALUES (";
+		$statement .= ") VALUES (";
 		foreach($record['values'] as $values)
 		{
 			if($count != 0)
-				$statement = $statement.",".$values;
+				$statement .= ",".$values;
 			else
-				$statement = $statement.$values;
+				$statement .= $values;
 			$count++;
 		}
-		$statement 	= $statement.");";
-		echo $statement;
+		$statement 	.= ");";
 		$this->runStatement($this->dbconn, $statement);
 	}
 	function deletelikeRecord($unlikerID, $imageID)

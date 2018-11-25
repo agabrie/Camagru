@@ -26,8 +26,13 @@
 					"message"=>$message
 					);
 		sendMail($mail);
-		echo	"<div style='text-align: center;'><div id='errordiv'>email sent to ".stringify(getValue("username",$_SESSION["username"], "email"))."</div></div>";
+		echo	"<div style='text-align: center;'>
+					<div id='errordiv'>
+						email sent to ".stringify(getValue("username",$_SESSION["username"], "email"))."
+					</div>
+				</div>";
 	}
+
 	function testErrors($post)
 	{
 		if(checkToken($_SESSION["username"],$post["token"]))
@@ -35,6 +40,7 @@
 		else
 			return 1;
 	}
+
 	function checkToken($name, $token)
 	{
 		global $db;
@@ -52,13 +58,11 @@
 <html>
 	<body>
 		<div align="center">
-			<!-- <div style="text-align:center">	 -->
 				<div id="login" class="container">
 					<form action="" method="post">
 						<label for="token">Token:</label><br>
 						<input type="text" name="token" value="<?php echo $_GET['token'];?>" /><br>
 						<input type="submit" name="btn" class="submit_button" value="Resend">
-						<!-- <linktext>Resend verification link?<br>Send token <a href=login.php>here</a>.<br></linktext> -->
 						<input type="submit" class="submit_button" name="btn" value="Verify"/>
 						<input type="submit" class="submit_button" name="btn" value="Back" />
 					</form>

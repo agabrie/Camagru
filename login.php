@@ -1,10 +1,7 @@
 <?php
-	// session_start();
-	// include("config.php");
 	include("header.php");
 	if($_POST["btn"] == "login")
 	{
-		// print_r($_POST);
 		switch(testErrors($_POST))
 		{
 			case 1:
@@ -14,7 +11,11 @@
 				header("Location: confirm_login.php");
 				break;
 		}
-		echo	"<div style='text-align: center;'><div id='errordiv'>$err</div></div>";
+		echo	"<div style='text-align: center;'>
+					<div id='errordiv'>
+						$err
+					</div>
+				</div>";
 	}
 	else if($_POST["btn"] == "back")
 	{
@@ -28,13 +29,12 @@
 		else
 			return 1;
 	}
+
 	function check_login($name,$passwrd)
 	{
 		global $db;
-		$statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);//." AND PASSWORD = ".stringify(hash("whirlpool", hash("whirlpool", $passwrd)));
-		echo $statement."<br>";
+		$statement = "SELECT * FROM USERS WHERE USERNAME = ".stringify($name);
 		$records = $db->returnRecord($statement);
-		// echo "<script language='javascript'>alert(".print_r($records).")</script><br>";
 		if($records[0]["password"] == hash("whirlpool", hash("whirlpool", $passwrd)))
 			$_SESSION["passwrd"]=$records[0]["password"];
 		else
@@ -43,18 +43,13 @@
 		$_SESSION["fname"] = $records[0]["fname"];
 		$_SESSION["lname"] = $records[0]["lname"];
 		$_SESSION["email"] = $records[0]["email"];
-		// $_SESSION["verified"] = $records[0]["verified"];
-		// echo "password from DB : ".$records[0]["password"]."<br>";
-		// echo "input : ".hash("whirlpool", hash("whirlpool", $passwrd))."<br>";
 		$_SESSION["verified"]=$records[0]["verified"];
-		// print_r($_SESSION);
 		return(1);
 	}
 ?>
 <html>
 	<body>
 		<div align="center">
-		<!-- <div style="text-align:center">	 -->
 			<div id="login" class="container">
 				<form action="login.php" method="post">
 					<label for="username">Username:</label><br>

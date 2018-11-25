@@ -1,10 +1,7 @@
-// navigator.getMedia =    navigator.getUserMedia ||
-// 							navigator.webkitGetUserMedia ||
-// 							navigator.mozGetUserMedia||
-							// navigator.msGetUserMedia;
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+
 var imageLoader = document.getElementById('file');
     		imageLoader.addEventListener('change', fetch, false);
 var i = 0;
@@ -28,12 +25,37 @@ function snap(){
 	i = 1;
 	canvas.width = 400;
 	canvas.height = 300;
-	// context.drawImage(video, 0, 0);
+
+	
+	
+	context.translate(canvas.width, 0);
+	context.scale(-1, 1);
+	context.save();
+	context.restore();
 	context.drawImage(video,0,0,640,480,0,0,canvas.width,canvas.height);
-	document.getElementById("canvas").style.transform = "rotateY(180deg)";
-	document.getElementById("canvas").style.webkitTransform = "rotateY(180deg)";
-	document.getElementById("canvas").style.mozTransform = "rotateY(180deg)";
+	document.getElementById("canvas").style.transform = "rotateY(0deg)";
+	document.getElementById("canvas").style.webkitTransform = "rotateY(0deg)";
+	document.getElementById("canvas").style.mozTransform = "rotateY(0deg)";
 	imageLoader.value="";
+}
+function resetcanvas()
+{
+	var something = document.getElementById("filteroverlay");
+	something.setAttribute('src','');
+}
+function setsticker(sticker)
+{
+	var something = document.getElementById("filteroverlay");
+	something.setAttribute('src', 'filter.png');
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'saveimages.php', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function (data) {
+		 if (xhr.readyState == 4 && xhr.status == 200) {
+			 console.log(xhr.responseText);
+		 }
+	}
+	xhr.send(JSON.stringify(sticker));
 }
 
 function fetch(e){
@@ -61,39 +83,29 @@ function create_button()
     	} else {
         	x.style.display = "none";
     	}
-	// Your existing code unmodified...
 	var iDiv = document.createElement('div');
 	iDiv.id = 'tempdiv';
 	iDiv.className = 'container';
-	// document.getElementsByTagName('body')[0].appendChild(iDiv);
-
-	// Now create and append to iDiv
 	
-	// create text box to append to innerdiv
 	var textBox = document.createElement('input');
 	textBox.setAttribute('type', 'text');
 	textBox.setAttribute('value', 'untitled.png');
 	textBox.className ="picname";
 	iDiv.appendChild(textBox);
 	
-	// create button top submit picture name
 	var butt = document.createElement('input');
 	butt.setAttribute('type', 'button');
 	butt.setAttribute('value', 'Save');
 	butt.className = 'savepicname';
 	butt.id = 'add_gal';
-	
-	
-	// The variable iDiv is still good... Just append to it.
 	iDiv.appendChild(butt);
-	
 	iDiv.style.zindex = "10";
 	document.getElementById("placeholder").appendChild(iDiv);
-	
-	
+
 	document.getElementById("add_gal").addEventListener("click", function(){
 		var img = new Image();
 		var nam;
+		
 		if(noSQLTest(textBox.value)){
 			nam = "untitled.png";
 		}

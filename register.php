@@ -1,13 +1,5 @@
 <?php
-	// session_start();
-	// include("config.php");
 	include("header.php");
-	// echo "<br><br><br><br><div class='notification'>notification!!</div>";
-    // echo '<script type="text/javascript">
-	// $(function() {
-	// 	$("div.notification").hide().fadeIn().delay(3000).fadeOut("slow");
-	// }); 
-    //           </script>';
 	if($_POST["btn"] == "register")
 	{
 		switch(testErrors($_POST))
@@ -55,35 +47,21 @@
 				header("Location: confirm_reg.php");
 				break;
 		}
-		
-		echo	"<div style='text-align: center;'><div id='errordiv'>$err</div></div>";
-				// "<script type='text/javascript'>
-				// $(
-				// 	function()
-				// 	{
-				// 		$('div.container').hide().fadeIn().delay(3000).fadeOut('slow');
-				// 	}
-				// );
-				// </script>";
-				// echo '<br><br><br><br><br><div class="notification">Notice: Foobar</div>';
-				// echo '<script language="JavaScript" type="text/">
-					// timedMsg("errordiv") 
-					//   </script>';
+		echo	"<div style='text-align: center;'>
+					<div id='errordiv'>
+						$err
+					</div>
+				</div>";
 	}
 	else if($_POST["btn"] == "back")
-	{
 		header("Location: edit.php");
-	}
 
 	function testErrors($post)
 	{
-		// print_r($post);
 		if($post["fname"] != "")
 		{
 			if(preg_match('/[;"=:*?<>|]/',$post["fname"] ))
-			{
 				return 1000;
-			}
 			$_SESSION["fname"] = $post["fname"];
 		}
 		else
@@ -127,6 +105,7 @@
 		}
 		else
 			return 6;
+
 		if($post["passwrd"] != "")
 		{
 			$validated = validate_password($post["passwrd"], $post["valid_passwrd"]);
@@ -135,15 +114,6 @@
 		else
 			return 7;
 	}
-	// function checkString($string)
-	// {
-	// 	if(preg_match('/;/', $string) || $string == "")
-	// 		return 0;
-	// 	return 1;
-	// }
-	
-	
-	
 ?>
 
 <html>
@@ -152,16 +122,16 @@
 			<div id="login" class="container">
 				<form action="" method="post">
 					<label for="fname">First Name:</label><br>
-					<input type="text" name="fname" value="<?php /*echo $_SESSION['fname'];*/?>" /><br>
+					<input type="text" name="fname" value="" /><br>
 					
 					<label for="lname">Last Name:</label><br>
-					<input type="text" name="lname" value="<?php /*echo $_SESSION['lname'];*/?>" /><br>
+					<input type="text" name="lname" value="" /><br>
 	
 					<label for="username">Username:</label><br>
-					<input type="text" name="username" value="<?php /*echo $_SESSION['username'];*/?>" /><br>
+					<input type="text" name="username" value="" /><br>
 					
 					<label for="email">Email:</label><br>
-					<input type="email" name="email" value="<?php /*echo $_SESSION['email'];*/?>" /><br>
+					<input type="email" name="email" value="" /><br>
 					
 					<label for="passwrd">Password:</label><br>
 					<input type="password" name="passwrd" value="" /><br>
@@ -172,27 +142,8 @@
 					<linktext>Already Registered? Login <a href=login.php>here</a>.<br></linktext>
 					<input type="submit" class="submit_button" name="btn" value="register"/>
 					<input type="submit" class="submit_button" name="btn" value="back" />
-					<!-- <div class="notification">Notice: Foobar</div> -->
-					<!-- <script type="text/javascript">
-						$(
-							function()
-							{
-								$('div.notification').hide().fadeIn().delay(3000).fadeOut('slow');
-							}
-						);
-					</script> -->
 				</form>
 			</div>
 		<div>
-		
 	</body>
-	<!-- <script type="text/javascript">
- 
-	function timedMsg(id)
-	{
-		$(function(){
-		document.getElementById(id).hide().fadeIn().delay(3000).fadeOut('slow');};)
-	}
- 
-	</script> -->
 </html>

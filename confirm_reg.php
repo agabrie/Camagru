@@ -5,7 +5,6 @@
 	/*************************** Insert new record into Database **************************/
 	// create token for verification
 	$token = hash("whirlpool", $_SESSION["username"].$_SESSION["email"]);
-	// echo $token;
 	error_log($token);
 	// columns needed to insert values into database
 	$columns	= array	(
@@ -30,7 +29,7 @@
 						stringify($_SESSION["lname"]),
 						stringify($_SESSION["email"]),
 						stringify($_SESSION["passwrd"]),
-						'0',											/*$db->gallerycount()*/
+						'0',
 		 				'0',
 						stringify($token)
 						);
@@ -44,22 +43,18 @@
 
 	/************************* Send email to user's email address **********************/
 	// headers required for sending mail
-	
 	$headers = array	(
 						"From"=>"noreply@localhost.co.za",
 						"Reply-To"=>"noreply@localhost.co.za",
 						"X-Mailer"=>"PHP/".phpversion()
 						);
 	$message = verifyemail($token);
-	// echo $message;
 	// call to send mail function from config.php
 	$mail = array	(
-					"to"=>getValue("username",$_SESSION["username"], "email"),
-					"subject"=>"Camagru account Verification needed",
-					"message"=>$message
-					// "headers"=>$headers
+					"to"=>		getValue("username",$_SESSION["username"], "email"),
+					"subject"=>	"Camagru account Verification needed",
+					"message"=>	$message
 					);
-	// print_r($mail);
 	sendMail($mail);
 	/**************************** Redirect to home page ******************************/
 	header("Location: edit.php");

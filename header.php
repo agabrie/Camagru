@@ -43,13 +43,9 @@ if($_POST["btn"] == "home")
                         if(getValue("username",$_SESSION["username"],"username") != "no value returned")
                         {
                             if(getValue("username",$_SESSION["username"], "verified") == 0)
-                            {
-                                echo
-                                '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';
-                            }
-                            echo
-                            '<td><input type="submit" class="header_button" name="btn" value="logout"></td>'.
-                            '<td><input type="submit" class="header_button" name="btn" value="settings"></td>';
+                                echo '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';
+                            echo    '<td><input type="submit" class="header_button" name="btn" value="logout"></td>
+                                    <td><input type="submit" class="header_button" name="btn" value="settings"></td>';
                         }
                         else
                             echo '<td><input type="submit" class="header_button" name="btn" value="login/signin"></td>';
