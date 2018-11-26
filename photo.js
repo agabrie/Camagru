@@ -1,7 +1,8 @@
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-
+var imagefilter = document.getElementById("filteroverlay");
+var canvasfilter = document.getElementById("filteroverlay2");
 var imageLoader = document.getElementById('file');
     		imageLoader.addEventListener('change', fetch, false);
 var i = 0;
@@ -40,19 +41,75 @@ function snap(){
 }
 function resetcanvas()
 {
-	var something = document.getElementById("filteroverlay");
-	something.setAttribute('src','');
+	imagefilter.setAttribute('src','');
+	canvasfilter.setAttribute('src','');
+	imagefilter.style.visibility = "hidden";
+	canvasfilter.style.visibility = "hidden";
 }
-function setsticker(sticker)
+function applyfilter(image)
 {
-	var something = document.getElementById("filteroverlay");
-	something.setAttribute('src', 'filter.png');
+	console.log(image);
+	var imga = new Image();
+	imga.src = image;
+	// http://127.0.0.1:8080/Camagru/stickers/
+	nam = (canvasfilter.src).substring(39);
+	// var c = canvas.getContext("2d");
+	// c.translate(canvas.width, 0);
+	// c.scale(1, 1);
+	// c.save();
+	// c.restore();
+	// c.drawImage(imga,0,0,imga.width,imga.height,0,0,canvas.width,canvas.height);
+	// console.log(c)
+	// canvas.style.transform = "rotateY(0deg)";
+	var json = {
+		pic: imga.src,
+		picname: nam
+	}
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'saveimages.php', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function (data) {
 		 if (xhr.readyState == 4 && xhr.status == 200) {
-			 console.log(xhr.responseText);
+			//  console.log(xhr.responseText);
+		 }
+	}
+	xhr.send(JSON.stringify(json));
+	window.location = "edit.php";
+}
+function applytocanvas()
+{
+	var img = new Image();
+	img.src = canvas.toDataURL();
+	var sticker = {
+		filter:canvasfilter.src,
+		canvas:img.src
+	}
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'filteroverlay.php', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function (data) {
+		 if (xhr.readyState == 4 && xhr.status == 200) {
+			// console.log(xhr.responseText);
+			applyfilter(xhr.responseText);	
+		 }
+		
+	}
+	xhr.send(JSON.stringify(sticker));
+}
+function setsticker(sticker)
+{
+	
+	imagefilter.setAttribute('src', './stickers/'+sticker+'.png');
+	canvasfilter.setAttribute('src', './stickers/'+sticker+'.png');
+	imagefilter.style.visibility = "visible";
+	canvasfilter.style.visibility = "visible";
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'edit.php', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function (data) {
+		 if (xhr.readyState == 4 && xhr.status == 200) {
+			//  console.log(xhr.responseText);
 		 }
 	}
 	xhr.send(JSON.stringify(sticker));
@@ -73,7 +130,19 @@ function fetch(e){
 	reader.readAsDataURL(e.target.files[0]);
 	document.getElementById("canvas").style.transform = "rotateY(0deg)";
 }
-
+function removeimage(imageID)
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'removeimage.php', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function (data) {
+		 if (xhr.readyState == 4 && xhr.status == 200) {
+			 console.log(xhr.responseText);
+		 }
+	}
+	xhr.send(JSON.stringify(imageID));
+	window.location = "edit.php";
+}
 function create_button()
 {
 	if(i == 1){
@@ -123,7 +192,7 @@ function create_button()
 				xhr.setRequestHeader('Content-type', 'application/json');
 				xhr.onreadystatechange = function (data) {
 					 if (xhr.readyState == 4 && xhr.status == 200) {
-						 console.log(xhr.responseText);
+						//  console.log(xhr.responseText);
 					 }
 				}
 				xhr.send(JSON.stringify(json));

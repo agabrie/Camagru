@@ -100,6 +100,7 @@
 	{
 		global $db;
 		$statement = $statement = "SELECT * FROM USERS WHERE ".strtoupper($field)." = ".stringify($name);
+		echo $statement;
 		$records = $db->returnFirstRecord($statement);
 		if($records[$value])
 			return($records[$value]);
@@ -172,6 +173,14 @@
 								);
 		return $message;
 	}
+	function commented($commentor)
+	{
+		$message = createMessage(array	($commentor." just commented on your image",
+										"Thank You for using Camagru"
+										)
+								);
+		return $message;
+	}
 	function checkUnique($condition,$value)
 	{
 		global $db;
@@ -198,4 +207,5 @@
 		else
 			return 9;
 	}
+
 ?>

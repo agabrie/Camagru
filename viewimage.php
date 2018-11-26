@@ -40,7 +40,9 @@ include("header.php");
 						$i = 0;
 						foreach($records as $comment)
 						{
-							$commentreplaced = (preg_replace("/[%01]/","'",$comment["comment"]))?preg_replace("/%01/","'",$comment["comment"]) : $comment["comment"];
+							$replaceable = array("/%01/", "/%02/", "/%03/", "/%04/", "/%05/", "/%06/");
+							$non = array("'",";",'"',"<",">", "=");
+							$commentreplaced = (preg_replace($replaceable,$non,$comment["comment"]))?preg_replace($replaceable,$non,$comment["comment"]) : $comment["comment"];
 							echo	"<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>
 										".getValue("userId", $comment["userID"], "username")."
 									</a>:\t".
@@ -61,7 +63,13 @@ include("header.php");
 					var comment;
 					var x;
 					var textBox = document.getElementById("comm");
-					textBox.value = textBox.value.replace(/'/g,"%01");
+					var replaceable = [/'/g,/;/g,/"/g,/</g,/>/g, /=/g]
+					var non = ["%01","%02","%03","%04","%05", "%06"]
+					alert(non[0]);
+					for(i = 0; i < replaceable.length;i++){
+						alert(non[i]);
+						textBox.value = textBox.value.replace(replaceable[i],non[i]);
+					}
 					if(noSQLTest(textBox.value)){
 						
 						comment = "";
@@ -90,7 +98,7 @@ include("header.php");
 								 }
 							}
 							xhr.send(JSON.stringify(json));
-							document.location.reload(true);
+							// document.location.reload(true);
 					}
 				}
 			}

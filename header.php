@@ -1,18 +1,21 @@
 <?php
 session_start();
 include("config.php");
-if($_POST["btn"] == "login/signin")
-    header("Location: register.php");
-if($_POST["btn"] == "Verify")
-    header("Location: verifyaccount.php");
-if($_POST["btn"] == "Camera")
-    header("Location: edit.php");
-if($_POST["btn"] == "logout")
-    header("Location: logout.php");
-if($_POST["btn"] == "settings")
-    header("Location: settings.php");
-if($_POST["btn"] == "home")
-    header("Location: index.php");
+if(isset($_POST["btn"]))
+{
+    if($_POST["btn"] == "login/signin")
+        header("Location: register.php");
+    if($_POST["btn"] == "Verify")
+        header("Location: verifyaccount.php");
+    if($_POST["btn"] == "Camera")
+        header("Location: edit.php");
+    if($_POST["btn"] == "logout")
+        header("Location: logout.php");
+    if($_POST["btn"] == "settings")
+        header("Location: settings.php");
+    if($_POST["btn"] == "home")
+        header("Location: index.php");
+}
 ?> 
 <html>
 <head>
