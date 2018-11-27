@@ -5,7 +5,7 @@
 	/*************************** Insert new record into Database **************************/
 	// create token for verification
 	$token = hash("whirlpool", $_SESSION["username"].$_SESSION["email"]);
-	error_log($token);
+	// error_log($token);
 	// columns needed to insert values into database
 	$columns	= array	(
 						"username",

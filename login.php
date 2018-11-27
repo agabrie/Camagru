@@ -7,6 +7,9 @@
 			case 1:
 				$err = "Username or password is incorrect";
 				break;
+			case 2:
+				$err = "Don't even think about it...";
+				break;
 			default:
 				header("Location: confirm_login.php");
 				break;
@@ -24,6 +27,10 @@
 
 	function testErrors($post)
 	{
+		if(preg_match('/[;"=:*?<>|]/',$post["username"] ))
+		{
+			return 2;
+		}
 		if(check_login($post["username"],$post["passwrd"]))
 			return 0;
 		else

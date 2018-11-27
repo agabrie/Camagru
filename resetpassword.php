@@ -17,7 +17,11 @@
 					<div id='errordiv'>
 						email sent to ".stringify(getValue("email",$_POST["email"], "email"))."
 					</div>
-				</div>";	
+				</div>";
+	}
+	if($_POST["btn"] == "Back")
+	{
+		header("Location: login.php");
 	}
 ?>
 <html>

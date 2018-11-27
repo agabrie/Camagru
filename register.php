@@ -26,22 +26,23 @@
 				$err = "No Password";
 				break;
 			case 8:
-				$err = "Password not Strong Enough";
+				$err =	"Password not Strong Enough:<br>".
+						"Your password must contain Uppercase, Lowercase and digits and must be at least 8 characters long";
 				break;
 			case 9:
 				$err = "Passwords dont match";
 				break;
 			case 1000:
-				$err = "cant use stupid things in fname";
+				$err = "Don't be that guy...you can't use ' < > = ' \" ; ' in fname";
 				break;
 			case 1001:
-				$err = "cant use stupid things in lname";
+				$err = "Don't be that guy...you can't use ' < > = ' \" ; ' in lname";
 				break;
 			case 1002:
-				$err = "cant use stupid things in username";
+				$err = "Don't be that guy...you can't use ' < > = ' \" ; ' in username";
 				break;
 			case 1003:
-				$err = "cant use stupid things in email";
+				$err = "Don't be that guy...you can't use ' < > = ' \" ; ' things in email";
 				break;
 			default:
 				header("Location: confirm_reg.php");

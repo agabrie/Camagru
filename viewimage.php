@@ -28,7 +28,7 @@ include("header.php");
 							</button>
 					<input type="text" id="comm" name="comment" style="font-size:60%;">
 					<button class="takepicture" style="font-size:60%;" onclick="comment_button(
-								<?php echo getValue('username', $_SESSION['username'], 'userId') ?>,
+								<?php echo stringify(getValue('username', $_SESSION['username'], 'userId')) ?>,
 								<?php echo $_GET['imageID'] ?>
 							)">
 							comment
@@ -41,7 +41,7 @@ include("header.php");
 						foreach($records as $comment)
 						{
 							$replaceable = array("/%01/", "/%02/", "/%03/", "/%04/", "/%05/", "/%06/");
-							$non = array("'",";",'"',"<",">", "=");
+							$non = array("'",";",'"',"[","]", "=");
 							$commentreplaced = (preg_replace($replaceable,$non,$comment["comment"]))?preg_replace($replaceable,$non,$comment["comment"]) : $comment["comment"];
 							echo	"<a class='usercomment' href='userspics.php?userId=".$comment["userID"]."'>
 										".getValue("userId", $comment["userID"], "username")."
@@ -65,9 +65,9 @@ include("header.php");
 					var textBox = document.getElementById("comm");
 					var replaceable = [/'/g,/;/g,/"/g,/</g,/>/g, /=/g]
 					var non = ["%01","%02","%03","%04","%05", "%06"]
-					alert(non[0]);
+					// alert(non[0]);
 					for(i = 0; i < replaceable.length;i++){
-						alert(non[i]);
+						// alert(non[i]);
 						textBox.value = textBox.value.replace(replaceable[i],non[i]);
 					}
 					if(noSQLTest(textBox.value)){
@@ -94,11 +94,11 @@ include("header.php");
 							xhr.setRequestHeader('Content-type', 'application/json');
 							xhr.onreadystatechange = function (data) {
 								 if (xhr.readyState == 4 && xhr.status == 200) {
-									 console.log(xhr.responseText);
+									//  console.log(xhr.responseText);
 								 }
 							}
 							xhr.send(JSON.stringify(json));
-							// document.location.reload(true);
+							document.location.reload(true);
 					}
 				}
 			}
@@ -122,7 +122,7 @@ include("header.php");
 					xmhr.setRequestHeader('Content-type', 'application/json');
 					xmhr.onreadystatechange = function (data) {
 						 if (xmhr.readyState == 4 && xmhr.status == 200) {
-							 console.log(xmhr.responseText);
+							//  console.log(xmhr.responseText);
 						 }
 					};
 					xmhr.send(JSON.stringify(jason));

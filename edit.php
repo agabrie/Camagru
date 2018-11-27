@@ -17,6 +17,14 @@
 					</div>
 				</div>";
 	}
+	if(getValue("username", $_SESSION["username"], "verified") == '0')
+	{
+		echo	"<div style='text-align: center;'>
+					<div id='errorsdiv'>
+						You must verify your account to save pictures.
+					</div>
+				</div>";
+	}
 	else
 	{
 		if(getValue("username",$_SESSION["username"],"verified") == "0")
@@ -72,7 +80,11 @@
 					<div class="container" id="filters">
 						filters<br>
 						<button class="takepicture" onclick="resetcanvas()">Reset</button>
-						<button class="takepicture" onclick="applytocanvas()">Save to Gallery</button>
+						<?php
+							if(getValue("username", $_SESSION["username"], "verified")){
+								echo '<button class="takepicture" onclick="applytocanvas()">Save to Gallery</button>';
+							}
+						?>
 						<div style="border:	5px double rgb(133, 15, 15);margin:3px 10px;"><img src='./stickers/border1.png' id='border1' width='80%' onclick='setsticker(id)'></div>
 						<div style="border:	5px double rgb(133, 15, 15);margin:3px 10px;"><img src='./stickers/kawaii_banner.png' id='kawaii_banner' width='80%' onclick='setsticker(id)'></div>
 						<div style="border:	5px double rgb(133, 15, 15);margin:3px 10px;"><img src='./stickers/kawaii_food.png' id='kawaii_food' width='80%' onclick='setsticker(id)'></div>

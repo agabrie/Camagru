@@ -48,7 +48,7 @@ function resetcanvas()
 }
 function applyfilter(image)
 {
-	console.log(image);
+	// console.log(image);
 	var imga = new Image();
 	imga.src = image;
 	// http://127.0.0.1:8080/Camagru/stickers/
@@ -137,7 +137,7 @@ function removeimage(imageID)
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function (data) {
 		 if (xhr.readyState == 4 && xhr.status == 200) {
-			 console.log(xhr.responseText);
+			//  console.log(xhr.responseText);
 		 }
 	}
 	xhr.send(JSON.stringify(imageID));

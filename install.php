@@ -101,6 +101,7 @@ class Db
 		$records = $this->returnRecord($statement);
 		return($records[0]);
 	}
+	
 	function insertRecord($record)
 	{
 		$count 		= 0;

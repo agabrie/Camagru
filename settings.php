@@ -12,8 +12,8 @@
 	}
 	if($_POST["btn"] == "Change Username")
 	{
-		echo $_SESSION["username"];
-		if(preg_match('/[;"=:*?<>|]/',$_POST["username"] )){
+		// echo $_SESSION["username"];
+		if(preg_match('/[;"=:*?<>|]/',$_POST["username"] ) || $_POST["username"] == ""){
 			echo	"<div style='text-align: center;'>
 						<div id='errordiv'>
 							No or Invalid Username format
@@ -38,7 +38,7 @@
 	
 	if($_POST["btn"] == "Change Email Address")
 	{
-		if(preg_match('/[;"=:*?<>|]/',$_POST["email"] )){
+		if(preg_match('/[;"=:*?<>|]/',$_POST["email"] ) || $_POST["email"] == ""){
 			echo	"<div style='text-align: center;'>
 						<div id='errordiv'>
 							No or Invalid email format

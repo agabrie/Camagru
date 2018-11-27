@@ -100,9 +100,10 @@
 	{
 		global $db;
 		$statement = $statement = "SELECT * FROM USERS WHERE ".strtoupper($field)." = ".stringify($name);
-		echo $statement;
+		// echo $statement;
 		$records = $db->returnFirstRecord($statement);
-		if($records[$value])
+		// print_r($records["verified"]);
+		if(isset($records[$value]))
 			return($records[$value]);
 		return("no value returned");
 	}

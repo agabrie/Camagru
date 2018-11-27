@@ -9,19 +9,22 @@ if ($headers["Content-type"] == "application/json") {
 	$values = array(stringify($stuff["comments"]), stringify($stuff["image"]), $stuff["commentor"]);
 	$record = array("table"=>$table, "values" =>$values);
 	$db->insertRecord($record);
-	$userId = stringify(getImageValue("id", $stuff["image"], "userID"));
-	echo "userId : ".$userId;
-	$username = getValue("userId", stringify($userId), "username");
-	echo "\nusername : ".$username;
-	// $emailaddress = getValue("userId", stringify($userId), "email");
+	$userId = getImageValue("id", $stuff["image"], "userID");
+	// echo "userId : ".stringify($userId);
+	$username = getValue("userId", $userId, "username");
+	// echo "\nusername : ".$username;
+	 $emailaddress = getValue("userId", $userId, "email");
+	//  echo "email : ".$emailaddress;
+	//  echo getValue("username", $username, "verified");
 	if(getValue("username", $username, "verified") == '2'){
-	$message = commented($username);
-	$mail = array	(
-					"to"=>getValue("username",$username, "email"),
-					"subject"=>"Somebody commented on your image on Camagru",
-					"message"=>$message
-					);
-	sendMail($mail);
+		$message = commented($username);
+		// echo $message;
+		$mail = array	(
+						"to"=>getValue("username",$username, "email"),
+						"subject"=>"Somebody commented on your image on Camagru",
+						"message"=>$message
+						);
+		sendMail($mail);
 	}
 }
 ?>
