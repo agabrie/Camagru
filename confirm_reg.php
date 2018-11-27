@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	// includes Db instance, stringify() function and sendMail() function
-	include_once("config.php");
+	include_once("config/setup.php");
 	/*************************** Insert new record into Database **************************/
 	// create token for verification
 	$token = hash("whirlpool", $_SESSION["username"].$_SESSION["email"]);

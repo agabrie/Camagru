@@ -1,5 +1,5 @@
 <?php
-	require("install.php");
+	require("config/database.php");
 	session_start();
 	// global $db;
 	$db = new Db(
@@ -155,10 +155,13 @@
 	function verifyemail($token)
 	{
 		$message = createMessage(array	("Thank You for registering with Camagru",
-										"To activate your account please click on the link below.",
-										linkToken('verifyaccount.php',$token),
-										"or insert this into the token field : ",
+										// "To activate your account please click on the link below.",
+										// linkToken('verifyaccount.php',$token),
+										// "or insert this into the token field : ",
+										"Please paste this token in the text field on the verification page linked below: ",
 										$token,
+										linkToken('verifyaccount.php',$token),
+										"", 
 										"Thank You for using Camagru"
 										)
 								);
