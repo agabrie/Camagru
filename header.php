@@ -1,6 +1,7 @@
 <?php
-session_start();
-include("config/setup.php");
+if (session_status() == PHP_SESSION_NONE) {
+    include("config/setup.php");
+}
 if(isset($_POST["btn"]))
 {
     if($_POST["btn"] == "login/signin")
@@ -19,48 +20,48 @@ if(isset($_POST["btn"]))
 ?> 
 <html>
 <head>
-		<title>CAMAGRU</title>
-		<div id="heading" class="container">
-			CAMAGRU
-		</div>
+    <link rel="stylesheet" href="html/style.css" />
+	<link
+	  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
+	  rel="stylesheet"
+    />
+    <div class="header">
         <form action="" method="post">
-            <div id="left_side">
-            <table>
-                <tr>
-                <td><input type="submit" class="header_button" name="btn" value="home"></td>
-                    <?php
+            <div class="navbutton-left">
+                <input type="submit" class="button" name="btn" value="home">
+                <?php
+                    // if($_SESSION != null){
+                        if(isset($_SESSION["username"])){
                         if(getValue("USERNAME",$_SESSION["username"],"fname") != "no value returned")
                         {
-                            echo
-                            '<td><input type="submit" class="header_button" name="btn" value="Camera"></td>';
-                        }
-                        
-                    ?>
-                </tr>
-            </table>
+                            echo '<input type="submit" class="button" name="btn" value="Camera">';
+                        }}
+                    // }
+                ?>
             </div>
-            <div id="right_side" >
-            <table>
-                <tr>
-                    <?php
+            <div class="navbutton-right">
+                <?php
+                    echo isset($_SESSION["username"]);
+                    if(isset($_SESSION["username"])){
                         if(getValue("username",$_SESSION["username"],"username") != "no value returned")
                         {
                             if(getValue("username",$_SESSION["username"], "verified") == 0)
-                                echo '<td><input type="submit" class="header_button" name="btn" value="Verify"></td>';
-                            echo    '<td><input type="submit" class="header_button" name="btn" value="logout"></td>
-                                    <td><input type="submit" class="header_button" name="btn" value="settings"></td>';
+                                echo '<input type="submit" class="button" name="btn" value="Verify">';
+                                echo    '<input type="submit" class="button" name="btn" value="logout">
+                                        <input type="submit" class="button" name="btn" value="settings">';
                         }
-                        else
-                            echo '<td><input type="submit" class="header_button" name="btn" value="login/signin"></td>';
-                        ?>
-                </tr>
-                </table>
+                    }
+                    else
+                        echo '<input type="submit" class="button" name="btn" value="login/signin">';
+                ?>
             </div>
         </form>
+        Camagru
+    </div>
+		<title>CAMAGRU</title>
+        
 		
-		<link href="style.css" type="text/css" rel="stylesheet" />
+		<!-- <link href="style.css" type="text/css" rel="stylesheet" /> -->
 </head>
-<div id="footing" class="container">
-			&copy agabrie
-</div>
+<div class="footer">&copy agabrie</div>
 </html>

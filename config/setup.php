@@ -1,12 +1,13 @@
 <?php
-	require("config/database.php");
+	require("database.php");
 	session_start();
+// }
 	// global $db;
 	$db = new Db(
 				array	(
 						"servername"     =>"localhost",
 						"username"		=>"root",
-						"password"		=>"R00t",
+						"password"		=>"roooot",
 						"dbname"		=>"CAMAGRU"
 						)
 				);

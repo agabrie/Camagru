@@ -3,11 +3,12 @@
 
 	$imagelimit = 15;
 
-	echo "<div class='container' id='home' style='max-height:86%;'>".
+	echo "<div class='main' id='home'>".
 		 "Welcome<br>";
+		 if($_SESSION != null){
 		if($_SESSION["username"]){
 			echo getValue("username",$_SESSION["username"],"fname")."<br><br>";
-		}
+		}}
 		$statement = "SELECT * FROM images ORDER BY `date` DESC";
 		$records = $db->returnRecord($statement);
 		$total = count($records);
@@ -21,6 +22,7 @@
 		}
 		$pages = ceil($total / $imagelimit);
 		echo "<table>";
+		if($records != null)
 		while ($i < $imagelimit*$page && $records[$i]){
 			$image = $records[$i];
 			echo "<td class='gallery'>

@@ -99,6 +99,7 @@ class Db
 	function returnFirstRecord($statement)
 	{
 		$records = $this->returnRecord($statement);
+		if($records != NULL)
 		return($records[0]);
 	}
 	

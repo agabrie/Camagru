@@ -1,0 +1,131 @@
+*{
+	margin:0px;
+	padding: 0px;
+}
+:root{
+	font-size: 16px;
+	font-family: 'Open Sans';
+	--text-primary: #b6b6b6;
+	--text-primary: #ececec;
+}
+
+.button{
+	background-color: cornflowerblue;
+	color: aliceblue;
+	border-radius: 10px;
+	border: none;
+	height: auto;
+	padding: .5rem 1rem;
+	width: auto;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	margin:0vh -0.5vw;
+	transition: 500ms ease;
+}
+.button:hover{
+	background-color: aliceblue;
+	color: cornflowerblue;
+	padding: 1rem;
+}
+.button:active{
+	background-color: aliceblue;
+	color: cornflowerblue;
+	padding: 1rem;
+}
+
+.navbutton-left{
+	position: fixed;
+	left: 0;
+	float: left;
+	margin-top: 2vh;
+	margin-left: 2vw;
+}
+.navbutton-right{
+	position: fixed;
+	right: 0;
+	float: right;
+	margin-top: 2vh;
+	margin-right: 2vw;
+}
+.header{
+	position: fixed;
+	top:0;
+	background-color: cornflowerblue;
+	width: 100vw;
+	height: 10vh;
+	align-content: center;
+	text-align:center;
+	padding: 0vh 1vw;
+	color: aliceblue;
+	font-size: 4rem;
+	overflow: hidden;
+	z-index: 10;
+}
+.footer{
+	position: fixed;
+	bottom:0;
+	background-color: cornflowerblue;
+	width: 100vw;
+	height: 5vh;
+	align-content: center;
+	text-align:center;
+	color: aliceblue;
+	font-size: 2rem;
+}
+.main{
+	padding: 1vh 1vw;
+	margin-top: 10vh;
+	overflow-y: scroll;
+	height: 83vh;
+	width: 98vw;
+}
+.inputField .error{
+	color: red;
+	visibility: hidden;
+}
+.main::-webkit-scrollbar{
+	width: 15px;
+}
+.main::-webkit-scrollbar-track{
+	background-color: rgba(100, 148, 236,0.3);
+	border-radius: 10px;
+}
+.main::-webkit-scrollbar-thumb{
+	background-color: rgba(100, 148, 236,0.5);
+	border-radius: 10px;
+	transition: 200ms ease;
+}
+.main::-webkit-scrollbar-thumb:hover{
+	background-color: rgba(100, 148, 236,1);
+}
+.main .centerd{
+	text-align: center;
+}
+/* .square{
+	margin:10vh 10vw;
+	width:10rem;
+	height:10rem;
+	background: turquoise;
+	border-radius: 30%;
+	transition: 500ms ease;
+	transform: rotate(0deg);
+}
+
+.square:hover{
+	background: purple;
+	border-radius: 0%;
+	transform: rotate(45deg);
+}
+.square:active{
+	width: 20rem;
+	height: 20rem;
+} */
+
+@media screen and (max-width: 500px) {
+	.button{
+	  float: none;
+	  display: block;
+	  font-size: large;
+	}
+  }
