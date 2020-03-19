@@ -20,15 +20,19 @@
 	text-align: center;
 	display: inline-block;
 	cursor: pointer;
-	margin:0vh -0.5vw;
+	/* margin:0vh -0.5vw; */
 	transition: 500ms ease;
 }
-.button:hover{
+.button:disabled{
+	background-color: rgba(240, 248, 255, 0.459);
+	cursor: not-allowed;
+}
+.button:hover:enabled{
 	background-color: aliceblue;
 	color: cornflowerblue;
 	padding: 1rem;
 }
-.button:active{
+.button:active:enabled{
 	background-color: aliceblue;
 	color: cornflowerblue;
 	padding: 1rem;
@@ -80,9 +84,27 @@
 	height: 83vh;
 	width: 98vw;
 }
-.inputField .error{
-	color: red;
-	visibility: hidden;
+
+.centerd {
+	background-color: cornflowerblue;
+	color: aliceblue;
+	border-radius: 10px;
+	width: fit-content;
+	margin: auto;
+	padding: 4vh 10vw;
+	/* visibility: hidden; */
+}
+.errordiv{
+	background-color: rgb(253, 196, 196);
+	border: solid 1px rgb(209, 92, 92);
+	border-radius: 5px;
+	color: rgb(209, 92, 92);
+	font-size: 11px;
+	transition: 500ms ease;
+}
+/* .errordiv:d{} */
+.input{
+	background-color: aqua;
 }
 .main::-webkit-scrollbar{
 	width: 15px;

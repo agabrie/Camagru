@@ -6,7 +6,7 @@
 	echo "<div class='main' id='home'>".
 		 "Welcome<br>";
 		 if($_SESSION != null){
-		if($_SESSION["username"]){
+		if(isset($_SESSION["username"])){
 			echo getValue("username",$_SESSION["username"],"fname")."<br><br>";
 		}}
 		$statement = "SELECT * FROM images ORDER BY `date` DESC";
