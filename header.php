@@ -41,7 +41,7 @@ if(isset($_POST["btn"]))
             </div>
             <div class="navbutton-right">
                 <?php
-                    echo isset($_SESSION["username"]);
+                    // echo isset($_SESSION["username"]);
                     if(isset($_SESSION["username"])){
                         if(getValue("username",$_SESSION["username"],"username") != "no value returned")
                         {

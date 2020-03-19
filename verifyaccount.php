@@ -1,6 +1,7 @@
 <?php
 	include("header.php");
-	if($_POST["btn"]=="Verify")
+	print_r($_GET);
+	if(isset($_POST["verify"]))
 	{
 		switch(testErrors($_POST))
 		{
@@ -12,11 +13,11 @@
 				break;
 		}
 	}
-	if($_POST["btn"] == "Back")
+	if(isset($_POST["back"]))
 	{
 		header("Location: edit.php");
 	}
-	if($_POST["btn"] == "Resend")
+	if(isset($_POST["resend"]))
 	{
 		$token = getValue("username",$_SESSION["username"], "token");
 		$message = verifyemail($token);
@@ -35,7 +36,7 @@
 
 	function testErrors($post)
 	{
-		if(checkToken($_SESSION["username"],$post["token"]))
+		if(checkToken($_SESSION["email"],$post["token"]))
 			return 0;
 		else
 			return 1;
@@ -44,11 +45,15 @@
 	function checkToken($name, $token)
 	{
 		global $db;
-		
-		if(getValue("username",$name, "token") == $token)
+		$userID = getValue("email",$name, "userId");
+		echo "<br/>tokens=><br/>".getValue("email",$name, "token")."<br/>".$token."<br/>";
+		print_r($_SESSION);
+		if(getValue("email",$name, "token") == $token)
 		{
-			$statement = "UPDATE USERS SET VERIFIED = 1 WHERE USERNAME = ".stringify($name);
+			
+			$statement = "UPDATE USERS SET VERIFIED = 1 WHERE USERID = ".stringify($userID);
 			$db->runStatement($db->getDBConn(),$statement);
+			$_SESSION["userId"] = $userID;
 		}else
 			return 0;
 		return 1;
@@ -57,14 +62,14 @@
 
 <html>
 	<body>
-		<div align="center">
-				<div id="login" class="container">
+		<div class="main">
+				<div id="verification" class="centerd">
 					<form action="" method="post">
 						<label for="token">Token:</label><br>
-						<input type="text" name="token" value="<?php echo $_GET['token'];?>" /><br>
-						<input type="submit" name="btn" class="submit_button" value="Resend">
-						<input type="submit" class="submit_button" name="btn" value="Verify"/>
-						<input type="submit" class="submit_button" name="btn" value="Back" />
+						<input type="text" name="token" value="<?php if(isset($_GET["token"])) echo $_GET['token'];?>" required/><br>
+						<input type="submit" class="button" name="resend" value="Resend">
+						<input type="submit" class="button" name="verify" value="Verify"/>
+						<input type="submit" class="button" name="back" value="Back" formnovalidate/>
 					</form>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 <?php
 	include("header.php");
 	$headers = getallheaders();
-	if ($headers["Content-type"] == "application/json") {
+	if (isset($headers["Content-type"]) && $headers["Content-type"] == "application/json") {
 		$stuff = json_decode(file_get_contents("php://input"), true);
 		// print_r($_SESSION);
 	}
@@ -17,7 +17,7 @@
 					</div>
 				</div>";
 	}
-	if(getValue("username", $_SESSION["username"], "verified") == '0')
+	if(getValue("userId", $_SESSION["userId"], "verified") == '0')
 	{
 		echo	"<div style='text-align: center;'>
 					<div id='errorsdiv'>
@@ -27,7 +27,7 @@
 	}
 	else
 	{
-		if(getValue("username",$_SESSION["username"],"verified") == "0")
+		if(getValue("userId",$_SESSION["userId"],"verified") == "0")
 			echo	"<div style='text-align: center;'>
 						<div id='errorsdiv'>
 							You must verify your account
@@ -38,11 +38,14 @@
 
 <html>
 	<body>
-			<div class="container" id="home">
-				<?php echo getValue("username",$_SESSION["username"],"fname")."'s" ?><br>
-				<?php echo "Gallery" ?><br>
+		<div class="main">
+		<div class="centerd" id="home">
+				<h1>
+					<?php echo getValue("username",$_SESSION["username"],"fname")."'s" ?><br>
+					<?php echo "Gallery" ?><br>
+				</h1>
 				<br>
-				<div class="container" id="main">
+				<div class="container" id="main" >
 					<div class="booth" >
 					<img id='filteroverlay' style='height:300px;width:400px;position:absolute;z-index:7;visibility:hidden;'>		
 						<video id="video" class="videoElement" width="400" height="300"></video>
@@ -98,5 +101,6 @@
 				
 			</div>
 			<script src="photo.js"></script>
+		</div>
 	</body>
 </html>
