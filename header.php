@@ -28,27 +28,22 @@ if(isset($_POST["btn"]))
     <div class="header">
         <form action="" method="post">
             <div class="navbutton-left">
-                <input type="submit" class="button" name="btn" value="home">
                 <?php
-                    // if($_SESSION != null){
-                        if(isset($_SESSION["username"])){
-                        if(getValue("USERNAME",$_SESSION["username"],"fname") != "no value returned")
-                        {
-                            echo '<input type="submit" class="button" name="btn" value="Camera">';
-                        }}
-                    // }
+                echo'<input type="submit" class="button" name="btn" value="home"/>';
+                if(isset($_SESSION["username"]))
+                  if(getValue("USERNAME",$_SESSION["username"],"fname") != "no value returned")
+                    echo '<input type="submit" class="button" name="btn" value="Camera">';
                 ?>
             </div>
             <div class="navbutton-right">
                 <?php
-                    // echo isset($_SESSION["username"]);
                     if(isset($_SESSION["username"])){
                         if(getValue("username",$_SESSION["username"],"username") != "no value returned")
                         {
                             if(getValue("username",$_SESSION["username"], "verified") == 0)
                                 echo '<input type="submit" class="button" name="btn" value="Verify">';
-                                echo    '<input type="submit" class="button" name="btn" value="logout">
-                                        <input type="submit" class="button" name="btn" value="settings">';
+                                echo '<input type="submit" class="button" name="btn" value="logout">';
+                                echo '<input type="submit" class="button" name="btn" value="settings">';
                         }
                     }
                     else
@@ -58,10 +53,7 @@ if(isset($_POST["btn"]))
         </form>
         Camagru
     </div>
-		<title>CAMAGRU</title>
-        
-		
-		<!-- <link href="style.css" type="text/css" rel="stylesheet" /> -->
+	<title>CAMAGRU</title>
 </head>
 <div class="footer">&copy agabrie</div>
 </html>

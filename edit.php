@@ -17,7 +17,7 @@
 					</div>
 				</div>";
 	}
-	if(getValue("userId", $_SESSION["userId"], "verified") == '0')
+	if(isset($_SESSION["userId"]) && getValue("userId", $_SESSION["userId"], "verified") == '0')
 	{
 		echo	"<div style='text-align: center;'>
 					<div id='errorsdiv'>
@@ -27,7 +27,7 @@
 	}
 	else
 	{
-		if(getValue("userId",$_SESSION["userId"],"verified") == "0")
+		if(isset($_SESSION["userId"]) && getValue("userId",$_SESSION["userId"],"verified") == "0")
 			echo	"<div style='text-align: center;'>
 						<div id='errorsdiv'>
 							You must verify your account
@@ -39,20 +39,20 @@
 <html>
 	<body>
 		<div class="main">
-		<div class="centerd" id="home">
+		<div class="centerd" id="edit">
 				<h1>
 					<?php echo getValue("username",$_SESSION["username"],"fname")."'s" ?><br>
 					<?php echo "Gallery" ?><br>
 				</h1>
 				<br>
-				<div class="container" id="main" >
-					<div class="booth" >
-					<img id='filteroverlay' style='height:300px;width:400px;position:absolute;z-index:7;visibility:hidden;'>		
-						<video id="video" class="videoElement" width="400" height="300"></video>
+				<div class="leftedit">
+					<div class="booth" style="padding:2vw;float:left;background-color:red;margin:0px;">
+					<img id='filteroverlay' style='height:300px;width:400px;position:absolute;z-index:7;visibility:hidden;'/>		
+						<video id="video" class="videoElement"></video>
 						<div id="placeholder">
-							<button class="takepicture" onclick="snap()">take picture</button><!--
-							--><input type="file" name="file" id="file" class="inputfile" /><label for="file">upload file</label><!--
-							-->
+							<button class="takepicture" onclick="snap()">take picture</button>
+							<input type="file" name="file" id="file" class="inputfile" hidden/>
+							<label for="file" class="button">upload file</label>
 								<?php
 									if((int)getValue("username",$_SESSION["username"],"verified") > 0)
 										echo '<button class="takepicture" id="save_button" onclick="create_button()">save picture</button>';

@@ -1,6 +1,6 @@
 <?php
 	include("header.php");
-	print_r($_GET);
+	// print_r($_GET);
 	if(isset($_POST["verify"]))
 	{
 		switch(testErrors($_POST))
@@ -45,12 +45,15 @@
 	function checkToken($name, $token)
 	{
 		global $db;
-		$userID = getValue("email",$name, "userId");
-		echo "<br/>tokens=><br/>".getValue("email",$name, "token")."<br/>".$token."<br/>";
-		print_r($_SESSION);
-		if(getValue("email",$name, "token") == $token)
+		$userID = getValue("email",$email, "userId");
+		$dbtoken = getValue("email",$email, "token");
+		// $token=$token;
+		// echo "<div class='main'><br/>tokens=><br/>".$dbtoken."<br/>".$token."<br/>";
+		// print_r($_SESSION);
+		// echo $dbtoken."</div>";
+		if($dbtoken == $token)
 		{
-			
+			// echo "yaaaaas";
 			$statement = "UPDATE USERS SET VERIFIED = 1 WHERE USERID = ".stringify($userID);
 			$db->runStatement($db->getDBConn(),$statement);
 			$_SESSION["userId"] = $userID;
@@ -65,8 +68,8 @@
 		<div class="main">
 				<div id="verification" class="centerd">
 					<form action="" method="post">
-						<label for="token">Token:</label><br>
-						<input type="text" name="token" value="<?php if(isset($_GET["token"])) echo $_GET['token'];?>" required/><br>
+						<label for="token">Token:</label><br/>
+						<input type="text" name="token" value="<?php if(isset($_GET["token"])) echo $_GET['token'];?>" required/><br/>
 						<input type="submit" class="button" name="resend" value="Resend">
 						<input type="submit" class="button" name="verify" value="Verify"/>
 						<input type="submit" class="button" name="back" value="Back" formnovalidate/>
