@@ -74,16 +74,19 @@
 		$to			=	$mail["to"];
 		$subject	=	$mail["subject"];
 		$message	=	$mail["message"];
+		if(isset($mail["headers"])){
 		$headers	=	"From: ".$mail["headers"]["from"]."\r\n".
 						"Reply-To: ".$mail["headers"]["Reply-To"]."\r\n".
 						"X-Mailer: ".$mail["headers"]["X-Mailer"];
+		}
+		// ini_set();
 		mail($to, $subject, $message);
 	}
 
 	function createMessage($message)
 	{
 		$count = 0;
-
+		$final = "";
 		foreach($message as $paragraph)
 		{
 			if($count)
@@ -95,7 +98,7 @@
 	}
 	function linkToken($page,$token)
 	{
-		return "http://localhost:8080/Camagru/".$page."?action=get&token=".$token[0];
+		return "http://localhost:8080/Camagru/".$page."?action=get&token=".$token;
 	}
 	function getValue($field,$name,$value)
 	{

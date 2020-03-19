@@ -90,7 +90,7 @@
 	function testErrors($post)
 	{
 		global $errors;
-		print_r($post);
+		// print_r($post);
 			// if(testFName($post["fname"]) == 0){
 			// 	if(testLName($post["lname"]) == 0){
 			// 		if(testUName($post["username"]) == 0){
@@ -98,11 +98,22 @@
 		if(($msg=testEmail($post["email"])) == 0){
 			echo "email = ".$msg;
 			if(($msg =testPassword($post["passwrd"],$post["valid_passwrd"]))==0){
-				echo "passwords = ".$msg;
+				// echo "passwords = ".$msg;
+				$_SESSION["fname"] = $post["fname"];
+				$_SESSION["lname"] = $post["lname"];
+				$_SESSION["username"] = $post["username"];
+				$_SESSION["email"] = $post["email"];
+				// $_SESSION["fname"] = $post["fname"];
+				// $_SESSION["fname"] = $post["fname"];
+				// $_SESSION["fname"] = $post["fname"];
+
+				header("Location: confirm_reg.php");
 			}
 			else
-				echo "<div class='errordiv' id='err_fname' hidden>"+$err[9]+"</div>"
+				echo "<div class='errordiv' id='err_fname'>".$errors[9]."</div>";
 		}
+		else
+			echo "<div class='errordiv' id='err_fname'>".$errors[$msg]."</div>";
 					// }
 				// }
 			// }
@@ -136,19 +147,19 @@
 					<inputField name="lname" text="Last Name"/> -->
 
 					<label for="fname">First Name:</label><br>
-					<input type="text" name="fname" value="" id="fname" required/><br>
+					<input type="text" name="fname"  id="fname" required value="<?php if(isset($_POST["fname"]))echo $_POST["fname"]; ?>" /><br>
 					<div class="errordiv" id="err_fname" hidden></div>
 					
 					<label for="lname">Last Name:</label><br>
-					<input type="text" name="lname" value="" id="lname" required/><br>
+					<input type="text" name="lname"  id="lname" required value="<?php if(isset($_POST["lname"]))echo $_POST["lname"]; ?>" /><br>
 					<div class="errordiv" id="err_lname" hidden></div>
 	
 					<label for="username">Username:</label><br>
-					<input type="text" name="username" value="" id="username" required/><br>
+					<input type="text" name="username" id="username" required value="<?php if(isset($_POST["username"]))echo $_POST["username"]; ?>" /><br>
 					<div class="errordiv" id="err_username" hidden></div>
 					
 					<label for="email">Email:</label><br>
-					<input type="email" name="email" value="" id="email" required/><br>
+					<input type="email" name="email" id="email" required value="<?php if(isset($_POST["email"]))echo $_POST["email"]; ?>" /><br>
 					<div class="errordiv" id="err_email" hidden></div>
 					
 					<label for="passwrd">Password:</label><br>
@@ -161,7 +172,7 @@
 	
 					<linktext>Already Registered? Login <a href=login.php>here</a>.<br></linktext>
 					<input type="submit" class="button"  name="register" value="register" id="reg" disabled/>
-					<input type="submit" class="button" name="btn" value="back" />
+					<input type="submit" class="button" name="back" value="back" formnovalidate/>
 				</form>
 				<?php
 					// print_r($_POST);
@@ -171,8 +182,11 @@
 						testErrors($_POST);
 					}
 					else{
-						if(isset($_POST["back"]))
-							header("Location: edit.php");
+						// print_r($_POST);
+						if(isset($_POST["back"])){
+							// echo "back pressed";
+							header("Location: index.php");
+						}
 					}
 				?>
 			</div>

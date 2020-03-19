@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	// session_start();
 	// includes Db instance, stringify() function and sendMail() function
 	include_once("config/setup.php");
 	/*************************** Insert new record into Database **************************/
@@ -55,7 +55,8 @@
 					"subject"=>	"Camagru account Verification needed",
 					"message"=>	$message
 					);
+	print_r( $mail);
 	sendMail($mail);
 	/**************************** Redirect to home page ******************************/
-	header("Location: edit.php");
+	// header("Location: edit.php");
 ?>

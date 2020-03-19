@@ -18,13 +18,13 @@ let fname = document.getElementById('fname');
 		"You cannot use special characters in fname",
 		"You cannot use special characters in lname",
 		"You cannot use special characters in username",
-		"You cannot use special characters things in email",
+		"invalid format for email address",
 		"first name too short",
 		"last name too short",
 		"username too short"
 	]
 	var submit = document.getElementById('reg');
-	fname.addEventListener('change', function(){
+	fname.addEventListener('input', function(){
 		let errlbl = document.getElementById(`err_${this.name}`);
 		let name = this.value;
 		let message = errIndex[testFName(name)];
@@ -40,7 +40,7 @@ let fname = document.getElementById('fname');
 		errlbl.innerHTML = message;
 	});
 
-	lname.addEventListener('change', function(){
+	lname.addEventListener('input', function(){
 		let errlbl = document.getElementById(`err_${this.name}`);
 		let name = this.value;
 		let message = errIndex[testLName(name)];
@@ -54,7 +54,7 @@ let fname = document.getElementById('fname');
 		};
 		errlbl.innerHTML = message;
 	});
-	username.addEventListener('change', function(){
+	username.addEventListener('input', function(){
 		let errlbl = document.getElementById(`err_${this.name}`);
 		let name = this.value;
 		let message = errIndex[testUName(name)];
@@ -68,9 +68,51 @@ let fname = document.getElementById('fname');
 		};
 		errlbl.innerHTML = message;
 	});
+	email.addEventListener('input', function(){
+		let errlbl = document.getElementById(`err_${this.name}`);
+		let name = this.value;
+		let message = errIndex[testEmail(name)];
+		if(message === ""){
+			errlbl.style.display = 'none';
+			proceed = true;
+		}
+		else{
+			errlbl.style.display = 'block'
+			proceed = false;
+		};
+		errlbl.innerHTML = message;
+	});
+	passwrd.addEventListener('input', function(){
+		let errlbl = document.getElementById(`err_${this.name}`);
+		let name = this.value;
+		let message = errIndex[testPassword(name)];
+		if(message === ""){
+			errlbl.style.display = 'none';
+			proceed = true;
+		}
+		else{
+			errlbl.style.display = 'block'
+			proceed = false;
+		};
+		errlbl.innerHTML = message;
+	});
+	valid_passwrd.addEventListener('input', function(){
+		let errlbl = document.getElementById(`err_${this.name}`);
+		let name = this.value;
+		let message = errIndex[testValidPassword(name,passwrd.value)];
+		if(message === ""){
+			errlbl.style.display = 'none';
+			proceed = true;
+		}
+		else{
+			errlbl.style.display = 'block'
+			proceed = false;
+		};
+		errlbl.innerHTML = message;
+	});
 	function testFName(name){
 		let err = 0;
-		let patt = /\W/
+		let patt = /[^\w-_]+/
 		if(name.length<3)
 			err = 14;
 		let spc = name.match(patt);
@@ -81,7 +123,7 @@ let fname = document.getElementById('fname');
 	}
 	function testLName(name){
 		let err = 0;
-		let patt = /\W/
+		let patt = /[^\w-_]+/
 		if(name.length<3)
 			err = 15;
 		let spc = name.match(patt);
@@ -91,12 +133,40 @@ let fname = document.getElementById('fname');
 		return( err);
 	}function testUName(name){
 		let err = 0;
-		let patt = /\W/
+		let patt = /[^\w-_]+/
 		if(name.length<3)
 			err = 16;
 		let spc = name.match(patt);
 		if(spc !== null)
 			err = 12;
-		// console.log(name);
+		console.log(spc);
 		return( err);
+	}
+	function testEmail(name){
+		let err = 0;
+		let patt = /^[\w.]+[\w+-][0-9]+@[\w.]+.[\w]{2}/
+		if(name.length==0)
+			err = 6;
+		let spc = name.match(patt);
+		if(spc === null)
+			err = 13;
+		// console.log(name,spc);
+		return( err);
+	}
+	function testPassword(name){
+		let err = 0;
+		let patt = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/
+		if(name.length==0)
+			err = 7;
+		let spc = name.match(patt);
+		if(spc === null)
+			err = 8;
+		console.log(name,spc);
+		return( err);
+	}
+	function testValidPassword(name,vname){
+		let err = 0;
+		if(name !== vname)
+			err = 9;
+		return(err);
 	}
